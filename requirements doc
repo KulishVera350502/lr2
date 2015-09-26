@@ -2,7 +2,9 @@ Requirements Document
 
 1 Introduction
 
-This project will be developing an application that recommends TV shows. Application name - «yourShows». The app will recommend the series based on already viewed series or set parameters (genre, rating, release date, etc), provide a brief description of the series and its rating. 
+This project will be developing an application that recommends TV shows. Application name - «yourShows». The app will
+recommend the series based on already viewed series or set parameters (genre, rating, release date, etc), provide a brief 
+description of the series and its rating. 
 
 2 User Requirements
 
@@ -32,11 +34,13 @@ Java
 
 3 System Requirements
 
-These subsections contain all the software requirements at a level of detail sufficient enough to enable designers to design a system to satisfy those requirements, and testers to test that the system satisfies those requirements.
+These subsections contain all the software requirements at a level of detail sufficient enough to enable designers to design
+a system to satisfy those requirements, and testers to test that the system satisfies those requirements.
 
 3.1 Functional Requirements
 
-This application should be able to give a list of TV shows that fit the categories chosen by user or that are similiar to the shows that user specified. 
+This application should be able to give a list of TV shows that fit the categories chosen by user or that are similiar to
+the shows that user specified. 
 
 3.2 Non-Functional Requirements
 

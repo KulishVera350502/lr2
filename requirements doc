@@ -2,25 +2,33 @@ Requirements Document
 
 1 Introduction
 
-This project will be developing an application that recommends TV shows. Application name - «yourShows». The app will recommend the series based on already viewed series or set parameters (genre, rating, release date), provide a brief description of the series and its rating.
+This project will be developing an application that recommends TV shows. Application name - «yourShows». The app will recommend the series based on already viewed series or set parameters (genre, rating, release date, etc), provide a brief description of the series and its rating. 
 
 2 User Requirements
 
 2.1 Software Interfaces
 
-List all the external systems with which the software product interacts. These are external systems/libraries that you have to interact with.
+DB Browser for SQLite
+SQL Server
+Version 3.4.0
+SQLite Version 3.8.7
 
 2.2 User Interfaces
 
-Specify the logical characteristics of each interface between the software product and its users. This is a description of how the system will interact with its users.
+The app is a basic GUI prototype of which you can look up in this repository or use these links:
+1. https://github.com/KulishVera350502/lr2/blob/master/1.png (start page)
+2. https://github.com/KulishVera350502/lr2/blob/master/2.png (parameters) 
+3. https://github.com/KulishVera350502/lr2/blob/master/1.png (result)
+User can choose parameters and then see the list of TV shows that fit. 
 
 2.3 User Characteristics
 
-Describe those general characteristics of the intended users of the product, including educational level, experience, and technical expertise.
+This app is very easy to use for people of any educational level, experience, and technical expertise
 
 2.4 Assumptions and Dependencies
 
-List each of the factors that affect the requirements stated in the document.
+OS: Windows 7 or higher, Linux, Mac
+Java
 
 3 System Requirements
 
@@ -28,8 +36,10 @@ These subsections contain all the software requirements at a level of detail suf
 
 3.1 Functional Requirements
 
+This application should be able to give a list of TV shows that fit the categories chosen by user or that are similiar to the shows that user specified. 
+
 3.2 Non-Functional Requirements
 
-3.2.1 SOFTWARE QUALITY ATTRIBUTES
+1. Simple interface
+2. High performance
 
-List the quality attributes that are important for your system (e.g., reliability, security) and explain why they are important for your system and how they will be measured.

@@ -38,8 +38,8 @@ Java
 
 This application should be able to give a list of TV shows that fit the categories chosen by user or that are similiar to
 the shows that user specified. User will have a possibility to specify parameters like genre, release date, rating, or to 
-submit already watched TV shows. The result is the list of TV shows that. The results can be sorted by rating or in alphabetic
-order.
+submit already watched TV shows. The result is the list of TV shows that fit submitted categories. The results can be 
+sorted by rating or in alphabetic order.
 
 3.2 Non-Functional Requirements
 

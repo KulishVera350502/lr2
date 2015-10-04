@@ -34,16 +34,16 @@ Java
 
 3 System Requirements
 
-These subsections contain all the software requirements at a level of detail sufficient enough to enable designers to design
-a system to satisfy those requirements, and testers to test that the system satisfies those requirements.
-
 3.1 Functional Requirements
 
 This application should be able to give a list of TV shows that fit the categories chosen by user or that are similiar to
-the shows that user specified. 
+the shows that user specified. User will have a possibility to specify parameters like genre, release date, rating, or to 
+submit already watched TV shows. The result is the list of TV shows that. The results can be sorted by rating or in alphabetic order.
 
 3.2 Non-Functional Requirements
 
 1. Simple interface
+The application is pretty simple and doesn't require a lot of settings and stuff. Also each window will have tips on how 
+to properly use the app. It's very user friendly.
 2. High performance
 

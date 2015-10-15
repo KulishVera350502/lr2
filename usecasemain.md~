@@ -349,7 +349,7 @@
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
-			location   	(514, 336)
+			location   	(520, 342)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -362,7 +362,7 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@4
-			    location   	(514, 496)
+			    location   	(520, 502)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	325
@@ -375,7 +375,7 @@
 			annotation 	8
 			autoResize 	TRUE)
 		    (object AssociationViewNew "$UNNAMED$0" @5
-			location   	(389, 665)
+			location   	(391, 668)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -392,30 +392,30 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "$UNNAMED$1" @6
 				Parent_View 	@5
-				location   	(-1714, 243)
+				location   	(-1712, 246)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B798903C0"
 				client     	@5
 				supplier   	@1
 				vertices   	(list Points
-				    (389, 665)
+				    (391, 668)
 				    (333, 810))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$2" @7
 				Parent_View 	@5
-				location   	(-1714, 243)
+				location   	(-1712, 246)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B798903CA"
 				client     	@5
 				supplier   	@4
 				vertices   	(list Points
-				    (389, 665)
-				    (446, 521))
+				    (391, 668)
+				    (449, 527))
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$3" @8
-			location   	(681, 830)
+			location   	(684, 833)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -432,30 +432,30 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "$UNNAMED$4" @9
 				Parent_View 	@8
-				location   	(-1422, 408)
+				location   	(-1419, 411)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B798C03B6"
 				client     	@8
 				supplier   	@2
 				vertices   	(list Points
-				    (681, 830)
-				    (787, 1139))
+				    (684, 833)
+				    (788, 1139))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$5" @10
 				Parent_View 	@8
-				location   	(-1422, 408)
+				location   	(-1419, 411)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B798C03B8"
 				client     	@8
 				supplier   	@4
 				vertices   	(list Points
-				    (681, 830)
-				    (576, 521))
+				    (684, 833)
+				    (581, 527))
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$6" @11
-			location   	(810, 591)
+			location   	(813, 594)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -472,27 +472,27 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "$UNNAMED$7" @12
 				Parent_View 	@11
-				location   	(-1293, 169)
+				location   	(-1290, 172)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B7990000A"
 				client     	@11
 				supplier   	@3
 				vertices   	(list Points
-				    (810, 591)
-				    (984, 741))
+				    (813, 594)
+				    (984, 742))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$8" @13
 				Parent_View 	@11
-				location   	(-1293, 169)
+				location   	(-1290, 172)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B7990000C"
 				client     	@11
 				supplier   	@4
 				vertices   	(list Points
-				    (810, 591)
-				    (637, 441))
+				    (813, 594)
+				    (643, 447))
 				line_style 	0)))
 		    (object UseCaseView "Use Case View::Generate the list based on parameters" @14
 			location   	(1944, 543)
@@ -519,32 +519,7 @@
 			fill_color 	13434879
 			quidu      	"561B808C030F"
 			height     	118)
-		    (object UseCaseView "Use Case View::Generate the list based on watched TV shows" @15
-			location   	(1861, 1184)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@15
-			    location   	(1861, 1322)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Generate the list based on watched TV shows")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"561B80680367"
-			height     	118)
-		    (object ClassView "Class" "Use Case View::User" @16
+		    (object ClassView "Class" "Use Case View::User" @15
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
@@ -560,7 +535,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@16
+			    Parent_View 	@15
 			    location   	(1364, 532)
 			    anchor_loc 	1
 			    nlines     	2
@@ -573,17 +548,17 @@
 			quidu      	"561B73B303AB"
 			annotation 	8
 			autoResize 	TRUE)
-		    (object InheritView "" @17
+		    (object InheritView "" @16
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"561B7A12021F"
 			client     	@4
-			supplier   	@16
+			supplier   	@15
 			vertices   	(list Points
-			    (571, 336)
-			    (1304, 367))
+			    (577, 342)
+			    (1304, 368))
 			line_style 	0)
-		    (object AssociationViewNew "$UNNAMED$9" @18
+		    (object AssociationViewNew "$UNNAMED$9" @17
 			location   	(1627, 447)
 			font       	(object Font
 			    size       	10
@@ -599,30 +574,55 @@
 			line_color 	3342489
 			quidu      	"561B80B801BA"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$10" @19
-				Parent_View 	@18
+			    (object RoleView "$UNNAMED$10" @18
+				Parent_View 	@17
 				location   	(53, 16)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B80B90113"
-				client     	@18
+				client     	@17
 				supplier   	@14
 				vertices   	(list Points
 				    (1627, 447)
 				    (1833, 508))
 				line_style 	0)
-			    (object RoleView "$UNNAMED$11" @20
-				Parent_View 	@18
+			    (object RoleView "$UNNAMED$11" @19
+				Parent_View 	@17
 				location   	(53, 16)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B80B90115"
-				client     	@18
-				supplier   	@16
+				client     	@17
+				supplier   	@15
 				vertices   	(list Points
 				    (1627, 447)
 				    (1421, 387))
 				line_style 	0)))
+		    (object UseCaseView "Use Case View::Generate the list based on watched TV shows" @20
+			location   	(1861, 1184)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@20
+			    location   	(1861, 1322)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Generate the list based on watched TV shows")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"561B80680367"
+			height     	118)
 		    (object AssociationViewNew "$UNNAMED$15" @21
 			location   	(1618, 788)
 			font       	(object Font
@@ -646,10 +646,10 @@
 				line_color 	3342489
 				quidu      	"561B9C5803CE"
 				client     	@21
-				supplier   	@15
+				supplier   	@20
 				vertices   	(list Points
 				    (1618, 788)
-				    (1823, 1126))
+				    (1825, 1126))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$17" @23
 				Parent_View 	@21
@@ -658,10 +658,10 @@
 				line_color 	3342489
 				quidu      	"561B9C5803D8"
 				client     	@21
-				supplier   	@16
+				supplier   	@15
 				vertices   	(list Points
 				    (1618, 788)
-				    (1450, 516))
+				    (1412, 451))
 				line_style 	0)))))))
     root_category 	(object Class_Category "Logical View"
 	quid       	"561B733501EF"

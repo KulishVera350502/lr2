@@ -8,6 +8,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+import view.PasswordWindow;
+import view.MainWindow;
+
 public class StartWindow {
 
 	protected Shell shell;
@@ -60,13 +63,21 @@ public class StartWindow {
 		btnAdmin.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
+				PasswordWindow window = new PasswordWindow(shell, SWT.CLOSE);
+				window.open();
 			}
 		});
 		btnAdmin.setBounds(100, 167, 75, 25);
 		btnAdmin.setText("Admin");
 		
 		Button btnUser = new Button(shell, SWT.NONE);
+		btnUser.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MainWindow window = new MainWindow();
+				window.open();
+			}
+		});
 		btnUser.setBounds(100, 214, 75, 25);
 		btnUser.setText("User");
 

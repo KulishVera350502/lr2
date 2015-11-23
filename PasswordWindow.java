@@ -2,6 +2,7 @@ package view;
 
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.SWT;
@@ -9,6 +10,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+
+import view.AdminWindow;
 
 public class PasswordWindow extends Dialog {
 
@@ -51,6 +54,18 @@ public class PasswordWindow extends Dialog {
 		shell.setSize(270, 160);
 		shell.setText(getText());
 		
+		Label lblPassword = new Label(shell, SWT.NONE);
+		lblPassword.setBounds(10, 47, 55, 15);
+		lblPassword.setText("Password:");
+		
+		text = new Text(shell, SWT.BORDER);
+		text.setBounds(82, 44, 172, 21);
+		
+		Label lblWrong = new Label(shell, SWT.NONE);
+		lblWrong.setVisible(false);
+		lblWrong.setBounds(82, 71, 154, 15);
+		lblWrong.setText("Wrong password. Try again");
+		
 		Button btnCancel = new Button(shell, SWT.NONE);
 		btnCancel.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -62,16 +77,22 @@ public class PasswordWindow extends Dialog {
 		btnCancel.setText("Cancel");
 		
 		Button btnOk = new Button(shell, SWT.NONE);
+		btnOk.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (text.getText() != "admin") {
+					System.out.print(text.getText());
+					lblWrong.setVisible(true);
+				}
+				else {
+					AdminWindow window = new AdminWindow();
+					window.open();
+					
+				}
+			}
+		});
 		btnOk.setBounds(98, 96, 75, 25);
 		btnOk.setText("OK");
 		
-		text = new Text(shell, SWT.BORDER);
-		text.setBounds(82, 44, 172, 21);
-		
-		Label lblPassword = new Label(shell, SWT.NONE);
-		lblPassword.setBounds(10, 47, 55, 15);
-		lblPassword.setText("Password");
-		
-
 	}
 }

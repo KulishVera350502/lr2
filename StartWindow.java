@@ -1,6 +1,7 @@
 package view;
 
 import org.eclipse.swt.widgets.Display;
+
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
@@ -10,10 +11,15 @@ import org.eclipse.swt.events.SelectionEvent;
 
 import view.PasswordWindow;
 import view.MainWindow;
+import app.DatabaseConnection;
+
+import java.sql.*;
 
 public class StartWindow {
 
 	protected Shell shell;
+	
+	Connection connection = null;
 
 	/**
 	 * Launch the application.
@@ -32,6 +38,7 @@ public class StartWindow {
 	 * Open the window.
 	 */
 	public void open() {
+		connection = DatabaseConnection.dbConnector();
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
@@ -75,11 +82,21 @@ public class StartWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MainWindow window = new MainWindow();
-				window.open();
+				window.open(connection);
 			}
 		});
 		btnUser.setBounds(100, 214, 75, 25);
 		btnUser.setText("User");
+		
+		Button btnExit = new Button(shell, SWT.NONE);
+		btnExit.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
+		btnExit.setBounds(100, 263, 75, 25);
+		btnExit.setText("Exit");
 
 	}
 }

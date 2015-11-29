@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -13,36 +15,39 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.DragDetectListener;
-import org.eclipse.swt.events.DragDetectEvent;
+
+import view.ResultWindow;
 
 public class MainWindow {
 
 	protected Shell shlYourshows;
 	
-	public String show1;
-	public String show2;
-	public String show3;
-	public String show4;
-	public String show5;
+	public List<String> shows = new ArrayList<String>();
 	
-	public String genre;
-	public int timeFrom;
-	public int timeTo;
+	public List<String> genres = new ArrayList<String>();
+	public int yearFrom;
+	public int yearTo;
 	public double ratingFrom;
 	public double ratingTo;
+	public int seasonsFrom;
+	public int seasonsTo;
+	
 	public boolean showIsClosed; 
 	
 	Connection connection;
-	PreparedStatement pst;
-	ResultSet rs;
+	PreparedStatement preparedStatement;
+	ResultSet resultSet;
+	
+	public MainWindow(Connection connection_) {
+		// TODO Auto-generated constructor stub
+		connection = connection_;
+	}
 
 	/**
 	 * Open the window.
 	 * @param connection 
 	 */
-	public void open(Connection connection_) {
-		connection = connection_;
+	public void open() {
 		Display display = Display.getDefault();
 		createContents();
 		shlYourshows.open();
@@ -63,99 +68,50 @@ public class MainWindow {
 		shlYourshows.setSize(600, 500);
 		shlYourshows.setText("yourShows");
 		
-		Label lblShow = new Label(shlYourshows, SWT.SHADOW_IN);
-		lblShow.setBounds(10, 87, 55, 15);
-		lblShow.setText("Show #1: ");
+		Label lblShow[] = new Label[5];
 		
-		Combo comboshow1 = new Combo(shlYourshows, SWT.NONE);
-		fillComboBox(comboshow1);
-		comboshow1.setBounds(70, 84, 203, 23);
+		for(int i = 0; i < 5; i++) {
+			lblShow[i] = new Label(shlYourshows, SWT.SHADOW_IN);
+			lblShow[i].setBounds(10, 90 + i*40, 55, 15);
+			lblShow[i].setText("Show #" + (i+1) + ": ");
+		}
 		
-		Label lblShow_1 = new Label(shlYourshows, SWT.NONE);
-		lblShow_1.setText("Show #2: ");
-		lblShow_1.setBounds(10, 126, 55, 15);
+		Combo comboShow[] = new Combo[5];
 		
-		Combo comboshow2 = new Combo(shlYourshows, SWT.NONE);
-		fillComboBox(comboshow2);
-		comboshow2.setBounds(70, 123, 203, 23);
-		
-		Label lblShow_2 = new Label(shlYourshows, SWT.NONE);
-		lblShow_2.setText("Show #3: ");
-		lblShow_2.setBounds(10, 167, 55, 15);
-		
-		Combo comboshow3 = new Combo(shlYourshows, SWT.NONE);
-		fillComboBox(comboshow3);
-		comboshow3.setBounds(70, 164, 203, 23);
-		
-		Label lblShow_3 = new Label(shlYourshows, SWT.NONE);
-		lblShow_3.setText("Show #4: ");
-		lblShow_3.setBounds(10, 209, 55, 15);
-		
-		Combo comboshow4 = new Combo(shlYourshows, SWT.NONE);
-		fillComboBox(comboshow4);
-		comboshow4.setBounds(70, 206, 203, 23);
-		
-		Label lblShow_4 = new Label(shlYourshows, SWT.NONE);
-		lblShow_4.setText("Show #5: ");
-		lblShow_4.setBounds(10, 252, 55, 15);
-		
-		Combo comboshow5 = new Combo(shlYourshows, SWT.NONE);
-		fillComboBox(comboshow5);
-		comboshow5.setBounds(70, 249, 203, 23);
+		for(int i = 0; i < 5; i++) {
+			comboShow[i] = new Combo(shlYourshows, SWT.NONE);
+			fillComboBox(comboShow[i]);
+			comboShow[i].setBounds(70, 86 + i*40, 200, 20);
+		}
 		
 		Label lblGenre = new Label(shlYourshows, SWT.NONE);
-		lblGenre.setBounds(301, 87, 55, 15);
+		lblGenre.setBounds(300, 90, 55, 15);
 		lblGenre.setText("Genre: ");
 		
-		Button btnDrama = new Button(shlYourshows, SWT.CHECK);
-		btnDrama.setEnabled(false);
-		btnDrama.setBounds(380, 86, 61, 16);
-		btnDrama.setText("drama");
+		Button btnGenres[] = new Button[10];
 		
-		Button btnAction = new Button(shlYourshows, SWT.CHECK);
-		btnAction.setEnabled(false);
-		btnAction.setBounds(380, 125, 75, 16);
-		btnAction.setText("action");
+		for(int i = 0; i < 5; i++) {
+			btnGenres[i] = new Button(shlYourshows, SWT.CHECK);
+			btnGenres[i].setEnabled(false);
+			btnGenres[i].setBounds(360, 90 + i*40, 70, 15);
+		}
 		
-		Button btnComedy = new Button(shlYourshows, SWT.CHECK);
-		btnComedy.setEnabled(false);
-		btnComedy.setBounds(380, 167, 61, 16);
-		btnComedy.setText("comedy");
-		
-		Button btnAdventure = new Button(shlYourshows, SWT.CHECK);
-		btnAdventure.setEnabled(false);
-		btnAdventure.setBounds(461, 86, 93, 16);
-		btnAdventure.setText("adventure");
-		
-		Button btnHorror = new Button(shlYourshows, SWT.CHECK);
-		btnHorror.setEnabled(false);
-		btnHorror.setBounds(461, 125, 93, 16);
-		btnHorror.setText("horror");
-		
-		Button btnAnimation = new Button(shlYourshows, SWT.CHECK);
-		btnAnimation.setEnabled(false);
-		btnAnimation.setBounds(461, 167, 93, 16);
-		btnAnimation.setText("animation");
-		
-		Button btnFantasy = new Button(shlYourshows, SWT.CHECK);
-		btnFantasy.setEnabled(false);
-		btnFantasy.setBounds(380, 208, 64, 16);
-		btnFantasy.setText("fantasy");
-		
-		Button btnMystery = new Button(shlYourshows, SWT.CHECK);
-		btnMystery.setEnabled(false);
-		btnMystery.setBounds(461, 208, 93, 16);
-		btnMystery.setText("mystery");
-		
-		Button btnComics = new Button(shlYourshows, SWT.CHECK);
-		btnComics.setEnabled(false);
-		btnComics.setBounds(380, 252, 61, 16);
-		btnComics.setText("comics");
-		
-		Button btnCrime = new Button(shlYourshows, SWT.CHECK);
-		btnCrime.setEnabled(false);
-		btnCrime.setBounds(461, 252, 93, 16);
-		btnCrime.setText("crime");
+		for(int i = 5; i < 10; i++) {
+			btnGenres[i] = new Button(shlYourshows, SWT.CHECK);
+			btnGenres[i].setEnabled(false);
+			btnGenres[i].setBounds(450, 90 + (i-5)*40, 70, 15);
+		}
+
+		btnGenres[0].setText("drama");
+		btnGenres[1].setText("action");
+		btnGenres[2].setText("comedy");
+		btnGenres[3].setText("adventure");
+		btnGenres[4].setText("horror");
+		btnGenres[5].setText("animation");
+		btnGenres[6].setText("fantasy");
+		btnGenres[7].setText("mystery");
+		btnGenres[8].setText("comics");
+		btnGenres[9].setText("crime");
 		
 		Label lblSeasons = new Label(shlYourshows, SWT.NONE);
 		lblSeasons.setBounds(301, 302, 73, 23);
@@ -212,7 +168,7 @@ public class MainWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				comboratingto.removeAll();
-				for (double i = Integer.valueOf(comboratingfrom.getText()); i < getMaxRating(); i += 0.1)
+				for (double i = Double.valueOf(comboratingfrom.getText()); i < getMaxRating(); i += 0.1)
 					comboratingto.add("" + i);
 			}
 		});
@@ -234,10 +190,22 @@ public class MainWindow {
 		label_5.setBounds(482, 388, 11, 15);
 		
 		Combo comboyearto = new Combo(shlYourshows, SWT.NONE);
+		for (int i = getMinYear(); i < getMaxYear(); i += 1)
+			comboyearto.add("" + i);
 		comboyearto.setEnabled(false);
 		comboyearto.setBounds(497, 385, 64, 23);
 		
 		Combo comboyearfrom = new Combo(shlYourshows, SWT.NONE);
+		comboyearfrom.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				comboyearto.removeAll();
+				for (int i = Integer.valueOf(comboyearfrom.getText()); i < getMaxYear(); i += 1)
+					comboyearto.add("" + i);
+			}
+		});
+		for (int i = getMinYear(); i < getMaxYear(); i += 1)
+			comboyearfrom.add("" + i);
 		comboyearfrom.setEnabled(false);
 		comboyearfrom.setBounds(412, 385, 61, 23);
 		
@@ -251,21 +219,10 @@ public class MainWindow {
 		btnByShows.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				comboshow1.setEnabled(true);
-				comboshow2.setEnabled(true);
-				comboshow3.setEnabled(true);
-				comboshow4.setEnabled(true);
-				comboshow5.setEnabled(true);
-				btnDrama.setEnabled(false);
-				btnComedy.setEnabled(false);
-				btnHorror.setEnabled(false);
-				btnAction.setEnabled(false);
-				btnAdventure.setEnabled(false);
-				btnAnimation.setEnabled(false);
-				btnFantasy.setEnabled(false);
-				btnMystery.setEnabled(false);
-				btnComics.setEnabled(false);
-				btnCrime.setEnabled(false);
+				for(Combo combo : comboShow)
+					combo.setEnabled(true);
+				for(Button btn : btnGenres)
+					btn.setEnabled(false);
 				comboseasonsfrom.setEnabled(false);
 				comboseasonsto.setEnabled(false);
 				comboratingfrom.setEnabled(false);
@@ -275,28 +232,17 @@ public class MainWindow {
 			}
 		});
 		btnByShows.setSelection(true);
-		btnByShows.setBounds(10, 23, 90, 16);
+		btnByShows.setBounds(10, 40, 90, 16);
 		btnByShows.setText("by shows");
 		
 		Button btnByParameters = new Button(shlYourshows, SWT.RADIO);
 		btnByParameters.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				comboshow1.setEnabled(false);
-				comboshow2.setEnabled(false);
-				comboshow3.setEnabled(false);
-				comboshow4.setEnabled(false);
-				comboshow5.setEnabled(false);
-				btnDrama.setEnabled(true);
-				btnComedy.setEnabled(true);
-				btnHorror.setEnabled(true);
-				btnAction.setEnabled(true);
-				btnAdventure.setEnabled(true);
-				btnAnimation.setEnabled(true);
-				btnFantasy.setEnabled(true);
-				btnMystery.setEnabled(true);
-				btnComics.setEnabled(true);
-				btnCrime.setEnabled(true);
+				for(Combo combo : comboShow)
+					combo.setEnabled(false);
+				for(Button btn : btnGenres)
+					btn.setEnabled(true);
 				comboseasonsfrom.setEnabled(true);
 				comboseasonsto.setEnabled(true);
 				comboratingfrom.setEnabled(true);
@@ -305,22 +251,66 @@ public class MainWindow {
 				comboyearto.setEnabled(true);
 			}
 		});
-		btnByParameters.setBounds(301, 23, 107, 16);
+		btnByParameters.setBounds(300, 40, 107, 16);
 		btnByParameters.setText("by parameters");
 		
 		Button btnGo = new Button(shlYourshows, SWT.NONE);
 		btnGo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				ResultWindow window;
 				if (btnByParameters.getSelection()) {
-//					timeFrom = combotimefrom.getText();
-//					timeTo = combotimeto.getText();
-//					ratingFrom = comboratingfrom.getText();
-//					ratingTo = comboratingfrom.getText();
+					
+					genres.clear();
+					seasonsFrom = 0;
+					seasonsTo = 0;
+					ratingFrom = 0;
+					ratingTo = 0;
+					yearFrom = 0;
+					yearTo = 0;
+					
+					if (comboyearfrom.getText() != "")
+						yearFrom = Integer.valueOf(comboyearfrom.getText());
+					if (comboyearto.getText() != "")
+						yearTo = Integer.valueOf(comboyearto.getText());
+					
+					if(comboratingfrom.getText() != "")
+						ratingFrom = Double.valueOf(comboratingfrom.getText());
+					if(comboratingto.getText() != "")
+						ratingTo = Double.valueOf(comboratingto.getText());
+					
+					if(comboseasonsfrom.getText() != "")
+						seasonsFrom = Integer.valueOf(comboseasonsfrom.getText());
+					if(comboseasonsto.getText() != "")
+						seasonsTo = Integer.valueOf(comboseasonsto.getText());
+					
+					for(Button btn : btnGenres) 
+						if (btn.getSelection())
+							genres.add(btn.getText());
+					
+					showIsClosed = btnOnlyTheOnes.getSelection();
+					
+					System.out.println("" + seasonsFrom + " " + seasonsTo + " " + ratingFrom + " " + ratingTo + " " + yearFrom + " " + yearTo + " " + showIsClosed);
+					
+					window = new ResultWindow(genres, seasonsFrom, seasonsTo, ratingFrom, ratingTo, yearFrom, yearTo, showIsClosed);
+					window.open();
+				}
+				else {
+					shows.clear();
+					for(Combo combo : comboShow)
+						if (combo.getText() != "")
+							shows.add(combo.getText());
+
+					showIsClosed = btnOnlyTheOnes.getSelection();
+					
+					System.out.println("" + shows + " " + showIsClosed);
+					
+					window = new ResultWindow(shows, showIsClosed);
+					window.open();
 				}
 			}
 		});
-		btnGo.setBounds(249, 426, 75, 25);
+		btnGo.setBounds(250, 426, 75, 25);
 		btnGo.setText("GO");
 		
 		
@@ -329,30 +319,27 @@ public class MainWindow {
 
 	private double getMinRating() {
 		// TODO Auto-generated method stub
-		Float min = null;
+		Double min = null;
 		String sql = "select min(rating) from tvshows";
 		try {
-			pst = connection.prepareStatement(sql);
-			rs = pst.executeQuery();
-			min = Float.valueOf(rs.getString(1));
-			System.out.println(rs.getString(1));
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			min = Double.valueOf(resultSet.getString(1));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		java.lang.Math.
 		return min;
 	}
 
 	private double getMaxRating() {
 		// TODO Auto-generated method stub
-		Float max = null;
+		Double max = null;
 		String sql = "select max(rating) from tvshows";
 		try {
-			pst = connection.prepareStatement(sql);
-			rs = pst.executeQuery();
-			max = Float.valueOf(rs.getString(1));
-			System.out.println(rs.getString(1));
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			max = Double.valueOf(resultSet.getString(1));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -365,10 +352,9 @@ public class MainWindow {
 		int min = 0;
 		String sql = "select min(numberOfSeasons) from tvshows";
 		try {
-			pst = connection.prepareStatement(sql);
-			rs = pst.executeQuery();
-			min = Integer.valueOf(rs.getString(1));
-			System.out.println(rs.getString(1));
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			min = Integer.valueOf(resultSet.getString(1));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -381,26 +367,54 @@ public class MainWindow {
 		int max = 0;
 		String sql = "select max(numberOfSeasons) from tvshows";
 		try {
-			pst = connection.prepareStatement(sql);
-			rs = pst.executeQuery();
-			max = Integer.valueOf(rs.getString(1));
-			System.out.println(rs.getString(1));
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			max = Integer.valueOf(resultSet.getString(1));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return max + 1;
 	}
+	
+	private int getMinYear() {
+		// TODO Auto-generated method stub
+		int min = 0;
+		String sql = "select min(releaseYear) from tvshows";
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			min = Integer.valueOf(resultSet.getString(1));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return min;
+	}
+
+	private int getMaxYear() {
+		// TODO Auto-generated method stub
+		int max = 0;
+		String sql = "select max(releaseYear) from tvshows";
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			max = Integer.valueOf(resultSet.getString(1));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return max;	
+	}
 
 	private void fillComboBox(Combo comboshow) {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "select * from tvshows order by name";
-			pst = connection.prepareStatement(sql);
-			rs = pst.executeQuery();
-			
-			while(rs.next()) {
-				String name = rs.getString("name");
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				String name = resultSet.getString("name");
 				comboshow.add(name);
 			}
 			

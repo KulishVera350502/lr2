@@ -81,8 +81,9 @@ public class StartWindow {
 		btnUser.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				MainWindow window = new MainWindow();
-				window.open(connection);
+				MainWindow window = new MainWindow(connection);
+				window.open();
+				shell.close();
 			}
 		});
 		btnUser.setBounds(100, 214, 75, 25);

@@ -1,5 +1,8 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -10,6 +13,35 @@ public class ResultWindow {
 
 	protected Shell shell;
 	Table table;
+	
+	public List<String> shows = new ArrayList<String>();
+	
+	public List<String> genres = new ArrayList<String>();
+	public int yearFrom;
+	public int yearTo;
+	public double ratingFrom;
+	public double ratingTo;
+	public int seasonsFrom;
+	public int seasonsTo;
+	
+	public boolean showIsClosed; 
+
+	public ResultWindow() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public ResultWindow(List<String> shows, boolean showIsClosed) {
+		// TODO Auto-generated constructor stub
+		
+	}
+
+	public ResultWindow(List<String> genre_, int seasonsFrom_, int seasonsTo_, 
+						double ratingFrom_, double ratingTo_, 
+						int yearFrom_, int yearTo_,
+						boolean showIsClosed_) {
+		// TODO Auto-generated constructor stub
+		
+	}
 
 	/**
 	 * Launch the application.
@@ -73,7 +105,6 @@ public class ResultWindow {
 		tblclmnGenre.setWidth(100);
 		tblclmnGenre.setText("genre");
 		
-		table.
 
 	}
 

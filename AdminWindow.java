@@ -7,11 +7,22 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Composite;
 
 public class AdminWindow {
 
 	protected Shell shell;
-	private Table table;
+	private Text text;
+	private Text text_1;
 
 	/**
 	 * Launch the application.
@@ -46,29 +57,40 @@ public class AdminWindow {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(450, 300);
+		shell.setSize(350, 450);
 		shell.setText("SWT Application");
 		
-		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
-		tabFolder.setBounds(0, 0, 434, 261);
+		CTabFolder tabFolder = new CTabFolder(shell, SWT.BORDER);
+		tabFolder.setBounds(0, 0, 334, 411);
+		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		
-		TabItem tbtmAdd = new TabItem(tabFolder, SWT.NONE);
-		tbtmAdd.setText("Add");
+		CTabItem tbtmNewItem = new CTabItem(tabFolder, SWT.NONE);
+		tbtmNewItem.setText("New Item");
 		
-		TabItem tbtmChange = new TabItem(tabFolder, SWT.NONE);
-		tbtmChange.setText("Change");
+		Group group_1 = new Group(tabFolder, SWT.NONE);
+		tbtmNewItem.setControl(group_1);
 		
-		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText("New Item");
+		Label lblName = new Label(group_1, SWT.NONE);
+		lblName.setBounds(10, 50, 55, 15);
+		lblName.setText("Name: *");
 		
-		table = new Table(tabFolder, SWT.BORDER | SWT.FULL_SELECTION);
-		tabItem.setControl(table);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
+		text = new Text(group_1, SWT.BORDER);
+		text.setBounds(70, 47, 200, 21);
 		
-		TableColumn tblclmnName = new TableColumn(table, SWT.NONE);
-		tblclmnName.setWidth(100);
-		tblclmnName.setText("name");
+		Label label = new Label(group_1, SWT.NONE);
+		label.setText("Name: *");
+		label.setBounds(10, 91, 55, 15);
+		
+		text_1 = new Text(group_1, SWT.BORDER);
+		text_1.setBounds(70, 88, 200, 21);
+		
+		CTabItem tbtmNewItem_1 = new CTabItem(tabFolder, SWT.NONE);
+		tbtmNewItem_1.setText("New Item");
+		
+		Group group = new Group(tabFolder, SWT.NONE);
+		tbtmNewItem_1.setControl(group);
+		
+		
 
 	}
 }

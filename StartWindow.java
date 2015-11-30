@@ -15,11 +15,11 @@ import app.DatabaseConnection;
 
 import java.sql.*;
 
-public class StartWindow {
+public class StartWindow extends DatabaseConnection{
 
 	protected Shell shell;
 	
-	Connection connection = null;
+//	protected Connection connection = null;
 
 	/**
 	 * Launch the application.
@@ -38,7 +38,7 @@ public class StartWindow {
 	 * Open the window.
 	 */
 	public void open() {
-		connection = DatabaseConnection.dbConnector();
+//		connection = DatabaseConnection.dbConnector();
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
@@ -81,7 +81,7 @@ public class StartWindow {
 		btnUser.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				MainWindow window = new MainWindow(connection);
+				MainWindow window = new MainWindow();
 				window.open();
 				shell.close();
 			}

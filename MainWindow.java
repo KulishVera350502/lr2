@@ -16,9 +16,10 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+import app.DatabaseConnection;
 import view.ResultWindow;
 
-public class MainWindow {
+public class MainWindow extends DatabaseConnection{
 
 	protected Shell shlYourshows;
 	
@@ -34,13 +35,25 @@ public class MainWindow {
 	
 	public boolean showIsClosed; 
 	
-	Connection connection;
 	PreparedStatement preparedStatement;
 	ResultSet resultSet;
 	
-	public MainWindow(Connection connection_) {
+	public MainWindow() {
 		// TODO Auto-generated constructor stub
-		connection = connection_;
+//		connection = connection_;
+	}
+	
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			MainWindow window = new MainWindow();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -269,28 +282,20 @@ public class MainWindow {
 					yearFrom = 0;
 					yearTo = 0;
 					
-					if (comboyearfrom.getText() != "")
-						yearFrom = Integer.valueOf(comboyearfrom.getText());
-					if (comboyearto.getText() != "")
-						yearTo = Integer.valueOf(comboyearto.getText());
-					
-					if(comboratingfrom.getText() != "")
-						ratingFrom = Double.valueOf(comboratingfrom.getText());
-					if(comboratingto.getText() != "")
-						ratingTo = Double.valueOf(comboratingto.getText());
-					
-					if(comboseasonsfrom.getText() != "")
-						seasonsFrom = Integer.valueOf(comboseasonsfrom.getText());
-					if(comboseasonsto.getText() != "")
-						seasonsTo = Integer.valueOf(comboseasonsto.getText());
-					
+					yearFrom = (comboyearfrom.getText() != "") ? Integer.valueOf(comboyearfrom.getText()) : getMinYear();
+					yearTo = (comboyearto.getText() != "") ? Integer.valueOf(comboyearto.getText()) : getMaxYear();
+					ratingFrom = (comboratingfrom.getText() != "") ? Double.valueOf(comboratingfrom.getText()) : getMinRating();
+					ratingTo = (comboratingto.getText() != "") ? Double.valueOf(comboratingto.getText()) : getMaxRating();
+					seasonsFrom = (comboseasonsfrom.getText() != "") ? Integer.valueOf(comboseasonsfrom.getText()) : getMinNumberofSeasons();
+					seasonsTo = (comboseasonsto.getText() != "") ? Integer.valueOf(comboseasonsto.getText()) : getMaxNumberofSeasons();
+
 					for(Button btn : btnGenres) 
 						if (btn.getSelection())
 							genres.add(btn.getText());
 					
 					showIsClosed = btnOnlyTheOnes.getSelection();
 					
-					System.out.println("" + seasonsFrom + " " + seasonsTo + " " + ratingFrom + " " + ratingTo + " " + yearFrom + " " + yearTo + " " + showIsClosed);
+					System.out.println("" + genres + seasonsFrom + " " + seasonsTo + " " + ratingFrom + " " + ratingTo + " " + yearFrom + " " + yearTo + " " + showIsClosed);
 					
 					window = new ResultWindow(genres, seasonsFrom, seasonsTo, ratingFrom, ratingTo, yearFrom, yearTo, showIsClosed);
 					window.open();
@@ -312,8 +317,6 @@ public class MainWindow {
 		});
 		btnGo.setBounds(250, 426, 75, 25);
 		btnGo.setText("GO");
-		
-		
 
 	}
 
@@ -350,7 +353,7 @@ public class MainWindow {
 	protected int getMinNumberofSeasons() {
 		// TODO Auto-generated method stub
 		int min = 0;
-		String sql = "select min(numberOfSeasons) from tvshows";
+		String sql = "select min(seasons) from tvshows";
 		try {
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
@@ -365,7 +368,7 @@ public class MainWindow {
 	protected int getMaxNumberofSeasons() {
 		// TODO Auto-generated method stub
 		int max = 0;
-		String sql = "select max(numberOfSeasons) from tvshows";
+		String sql = "select max(seasons) from tvshows";
 		try {
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
@@ -380,7 +383,7 @@ public class MainWindow {
 	private int getMinYear() {
 		// TODO Auto-generated method stub
 		int min = 0;
-		String sql = "select min(releaseYear) from tvshows";
+		String sql = "select min(year) from tvshows";
 		try {
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
@@ -395,7 +398,7 @@ public class MainWindow {
 	private int getMaxYear() {
 		// TODO Auto-generated method stub
 		int max = 0;
-		String sql = "select max(releaseYear) from tvshows";
+		String sql = "select max(year) from tvshows";
 		try {
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();

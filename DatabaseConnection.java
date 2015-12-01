@@ -4,13 +4,13 @@ import java.sql.*;
 
 public class DatabaseConnection {
 	
-	Connection connection = null;
+	protected Connection connection = dbConnector();
 	
 	public static Connection dbConnector() {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection connection = DriverManager.getConnection("jdbc:sqlite:d:\\”˜Â·‡\\“–Ë“œŒ\\lr2\\lr2\\tvshows.sqlite");
-			System.out.print(connection + "success!");
+			System.out.println(connection + "success!");
 			return connection;
 		}
 		catch(Exception e) {

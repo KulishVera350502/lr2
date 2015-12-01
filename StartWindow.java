@@ -11,15 +11,10 @@ import org.eclipse.swt.events.SelectionEvent;
 
 import view.PasswordWindow;
 import view.MainWindow;
-import app.DatabaseConnection;
 
-import java.sql.*;
-
-public class StartWindow extends DatabaseConnection{
+public class StartWindow {
 
 	protected Shell shell;
-	
-//	protected Connection connection = null;
 
 	/**
 	 * Launch the application.
@@ -38,7 +33,6 @@ public class StartWindow extends DatabaseConnection{
 	 * Open the window.
 	 */
 	public void open() {
-//		connection = DatabaseConnection.dbConnector();
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();

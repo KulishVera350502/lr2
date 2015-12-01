@@ -1,6 +1,5 @@
 package view;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +16,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 import app.DatabaseConnection;
-import view.ResultWindow;
+import app.Search;
 
 public class MainWindow extends DatabaseConnection{
 
@@ -40,7 +39,6 @@ public class MainWindow extends DatabaseConnection{
 	
 	public MainWindow() {
 		// TODO Auto-generated constructor stub
-//		connection = connection_;
 	}
 	
 	/**
@@ -96,6 +94,9 @@ public class MainWindow extends DatabaseConnection{
 			fillComboBox(comboShow[i]);
 			comboShow[i].setBounds(70, 86 + i*40, 200, 20);
 		}
+		comboShow[0].setText("How I Met Your Mother");
+		comboShow[1].setText("Friends");
+		comboShow[2].setText("The Big Bang Theory");
 		
 		Label lblGenre = new Label(shlYourshows, SWT.NONE);
 		lblGenre.setBounds(300, 90, 55, 15);
@@ -172,7 +173,7 @@ public class MainWindow extends DatabaseConnection{
 		
 		Combo comboratingto = new Combo(shlYourshows, SWT.NONE);
 		for (double i = getMinRating(); i < getMaxRating(); i += 0.1)
-			comboratingto.add("" + i);
+			comboratingto.add(Double.toString(i).substring(0, 3));
 		comboratingto.setBounds(497, 340, 64, 23);
 		comboratingto.setEnabled(false);
 		
@@ -182,11 +183,11 @@ public class MainWindow extends DatabaseConnection{
 			public void widgetSelected(SelectionEvent e) {
 				comboratingto.removeAll();
 				for (double i = Double.valueOf(comboratingfrom.getText()); i < getMaxRating(); i += 0.1)
-					comboratingto.add("" + i);
+					comboratingto.add(Double.toString(i).substring(0, 3));
 			}
 		});
 		for (double i = getMinRating(); i < getMaxRating(); i += 0.1)
-			comboratingfrom.add("" + i);
+			comboratingfrom.add(Double.toString(i).substring(0, 3));
 		comboratingfrom.setBounds(412, 340, 61, 23);
 		comboratingfrom.setEnabled(false);
 		
@@ -225,7 +226,7 @@ public class MainWindow extends DatabaseConnection{
 		
 		
 		Button btnOnlyTheOnes = new Button(shlYourshows, SWT.CHECK);
-		btnOnlyTheOnes.setBounds(10, 430, 159, 16);
+		btnOnlyTheOnes.setBounds(10, 430, 160, 16);
 		btnOnlyTheOnes.setText("Only the closed shows");
 		
 		Button btnByShows = new Button(shlYourshows, SWT.RADIO);
@@ -271,7 +272,7 @@ public class MainWindow extends DatabaseConnection{
 		btnGo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				ResultWindow window;
+				Search search;
 				if (btnByParameters.getSelection()) {
 					
 					genres.clear();
@@ -295,10 +296,11 @@ public class MainWindow extends DatabaseConnection{
 					
 					showIsClosed = btnOnlyTheOnes.getSelection();
 					
-					System.out.println("" + genres + seasonsFrom + " " + seasonsTo + " " + ratingFrom + " " + ratingTo + " " + yearFrom + " " + yearTo + " " + showIsClosed);
+					System.out.println("" + genres + " " + seasonsFrom + " " + seasonsTo + " " + ratingFrom + 
+										" " + ratingTo + " " + yearFrom + " " + yearTo + " " + showIsClosed);
 					
-					window = new ResultWindow(genres, seasonsFrom, seasonsTo, ratingFrom, ratingTo, yearFrom, yearTo, showIsClosed);
-					window.open();
+					search = new Search(genres, seasonsFrom, seasonsTo, ratingFrom, ratingTo, yearFrom, yearTo, showIsClosed);
+					search.search();
 				}
 				else {
 					shows.clear();
@@ -310,8 +312,8 @@ public class MainWindow extends DatabaseConnection{
 					
 					System.out.println("" + shows + " " + showIsClosed);
 					
-					window = new ResultWindow(shows, showIsClosed);
-					window.open();
+					search = new Search(shows, showIsClosed);
+					search.search();
 				}
 			}
 		});
@@ -377,7 +379,7 @@ public class MainWindow extends DatabaseConnection{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		return max + 1;
+		return max;
 	}
 	
 	private int getMinYear() {

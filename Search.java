@@ -212,15 +212,6 @@ public class Search extends DatabaseConnection{
 		
 	}
 	
-	private int getCountFromDatabase() {
-		// TODO Auto-generated method stub
-		int count = 0;
-		String sql = "select count(*) from tvshows";
-		count = Integer.valueOf(getQueryResultData(sql, 1));
-		
-		return count;
-	}
-	
 	private ResultSet getQueryResultSet(String sql) {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
@@ -233,21 +224,5 @@ public class Search extends DatabaseConnection{
 			e1.printStackTrace();
 		}
 		return resultSet;
-	}
-
-	private String getQueryResultData(String sql, int number) {
-		// TODO Auto-generated method stub
-		String data = null;
-		ResultSet resultSet = null;
-		PreparedStatement preparedStatement;
-		try {
-			preparedStatement = connection.prepareStatement(sql);
-			resultSet = preparedStatement.executeQuery();
-			data = resultSet.getString(number);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		return data;
 	}
 }

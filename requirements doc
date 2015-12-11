@@ -1,10 +1,10 @@
-Requirements Document 
+﻿Requirements Document 
 
 1 Introduction
 
 This project will be developing an application that recommends TV shows. Application name - «yourShows». The app will
-recommend the series based on already viewed series or set parameters (genre, rating, release date, etc), provide a brief 
-description of the series and its rating. 
+recommend the series based on already viewed series or set parameters (genre, rating, release date, number of seasons), 
+provide a brief description of the series and its rating. 
 
 2 User Requirements
 
@@ -37,9 +37,9 @@ Java
 3.1 Functional Requirements
 
 This application should be able to give a list of TV shows that fit the categories chosen by user or that are similiar to
-the shows that user specified. User will have a possibility to specify parameters like genre, release date, rating, or to 
-submit already watched TV shows. The result is the list of TV shows that fit submitted categories. The results can be 
-sorted by rating or in alphabetic order.
+the shows that user specified. User will have a possibility to specify parameters like genre, release date, rating, 
+number of seasons or to submit already watched TV shows. The result is the list of TV shows that fit submitted categories.
+The results will be presented in a table form.
 
 3.2 Non-Functional Requirements
 

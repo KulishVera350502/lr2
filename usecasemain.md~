@@ -83,6 +83,77 @@
 		quid       	"561B73B303AB"
 		documentation 	"User can only find the TV shows by specifying the search parameters or TV shows that he watched."
 		stereotype 	"Actor")
+	    (object Class "Administrator"
+		quid       	"561B73BF0230"
+		documentation 	"Administrator can do everthing that usual user can plus edit the database."
+		stereotype 	"Actor"
+		superclasses 	(list inheritance_relationship_list
+		    (object Inheritance_Relationship
+			quid       	"561B7A12021F"
+			supplier   	"Use Case View::User"
+			quidu      	"561B73B303AB")))
+	    (object UseCase "Add TV show"
+		quid       	"561B781403D5"
+		documentation 	
+|Use case "Add the TV show" allows to administrator to add new TV show into the database.
+| 
+|This use case can be performed only if the user has administrator rights.
+|
+|Main thread:
+|1. Main thread starts when the user clicks the "Add TV show". 
+|2. The app offers to enter password. If the password is correct, main thread continues, else thread A1 starts
+|3. The "Add new TV show" window opens
+|4. Administrator has to fill out every field in the window and click the " Add" button. If all of the fields are filled the main thread stops. Else thread A2 starts.
+|
+|A1:
+|1. The app offers to re-enter the password by clicking "Try again" or to cancel by clicking "Cancel".
+|
+|A2:
+|1. The app offers to edit the data or to cancel by clicking "Cancel".
+|
+|Post-conditions:
+|New TV show is added to the database
+		)
+	    (object UseCase "Delete TV show"
+		quid       	"561B78240104"
+		documentation 	
+|Use case "Delete TV show" allows to administrator to add new TV show into the database.
+| 
+|This use case can be performed only if the user has administrator rights.
+|
+|Main thread:
+|1. Main thread starts when the user clicks the "Delete TV show". 
+|2. The app offers to enter password. If the password is correct, main thread continues, else thread A1 starts
+|3. Database opens
+|4. Administrator has to pick the show by clicking it and then click the "Delete" button.
+|
+|A1:
+|1. The app offers to re-enter the password by clicking "Try again" or to cancel by clicking "Cancel".
+|
+|Post-conditions:
+|TV show is deleted from the database
+		)
+	    (object UseCase "Change the TV show data"
+		quid       	"561B78F80234"
+		documentation 	
+|Use case "Change the TV show data" allows to administrator to change any data of any TV show.
+| 
+|This use case can be performed only if the user has administrator rights.
+|
+|Main thread:
+|1. Main thread starts when the user clicks the "Change the TV show data". 
+|2. The app offers to enter password. If the password is correct, main thread continues, else thread A1 starts
+|3. Database opens
+|4. Administrator has to pick the show by double-clicking it.
+|5. The editing window opens
+|6. Administrator can change the value of any field and save the changes by clicking "Save the changes".
+|
+|A1:
+|1. The app offers to re-enter the password by clicking "Try again" or to cancel by clicking "Cancel".
+|
+|Post-conditions:
+|TV show data is changed
+		)
 	    (object UseCase "Generate the list based on watched TV shows"
 		quid       	"561B80680367"
 		documentation 	
@@ -118,38 +189,74 @@
 |Search parameters have been specified
 		)
 	    (object Association "$UNNAMED$0"
-		quid       	"561B80B801BA"
+		quid       	"561B7989021C"
 		roles      	(list role_list
 		    (object Role "$UNNAMED$1"
+			quid       	"561B798903C0"
+			supplier   	"Use Case View::Change the TV show data"
+			quidu      	"561B78F80234"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$2"
+			quid       	"561B798903CA"
+			supplier   	"Use Case View::Administrator"
+			quidu      	"561B73BF0230")))
+	    (object Association "$UNNAMED$3"
+		quid       	"561B798C0168"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$4"
+			quid       	"561B798C03B6"
+			supplier   	"Use Case View::Delete TV show"
+			quidu      	"561B78240104"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$5"
+			quid       	"561B798C03B8"
+			supplier   	"Use Case View::Administrator"
+			quidu      	"561B73BF0230")))
+	    (object Association "$UNNAMED$6"
+		quid       	"561B798F02BC"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$7"
+			quid       	"561B7990000A"
+			supplier   	"Use Case View::Add TV show"
+			quidu      	"561B781403D5"
+			is_navigable 	TRUE)
+		    (object Role "$UNNAMED$8"
+			quid       	"561B7990000C"
+			supplier   	"Use Case View::Administrator"
+			quidu      	"561B73BF0230")))
+	    (object Association "$UNNAMED$9"
+		quid       	"561B80B801BA"
+		roles      	(list role_list
+		    (object Role "$UNNAMED$10"
 			quid       	"561B80B90113"
 			supplier   	"Use Case View::Generate the list based on parameters"
 			quidu      	"561B808C030F"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$2"
+		    (object Role "$UNNAMED$11"
 			quid       	"561B80B90115"
 			supplier   	"Use Case View::User"
 			quidu      	"561B73B303AB")))
-	    (object Association "$UNNAMED$3"
+	    (object Association "$UNNAMED$12"
 		quid       	"561B80BF016E"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$4"
+		    (object Role "$UNNAMED$13"
 			quid       	"561B80C0031C"
 			supplier   	"Use Case View::Generate the list based on watched TV shows"
 			quidu      	"561B80680367"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$5"
+		    (object Role "$UNNAMED$14"
 			quid       	"561B80C0031E"
 			supplier   	"Use Case View::User"
 			quidu      	"561B73B303AB")))
-	    (object Association "$UNNAMED$6"
+	    (object Association "$UNNAMED$15"
 		quid       	"561B9C58002B"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$7"
+		    (object Role "$UNNAMED$16"
 			quid       	"561B9C5803CE"
 			supplier   	"Use Case View::Generate the list based on watched TV shows"
 			quidu      	"561B80680367"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$8"
+		    (object Role "$UNNAMED$17"
 			quid       	"561B9C5803D8"
 			supplier   	"Use Case View::User"
 			quidu      	"561B73B303AB"))))
@@ -163,8 +270,8 @@
 		origin_x   	0
 		origin_y   	0
 		items      	(list diagram_item_list
-		    (object UseCaseView "Use Case View::Generate the list based on parameters" @1
-			location   	(1472, 1065)
+		    (object UseCaseView "Use Case View::Change the TV show data" @1
+			location   	(249, 846)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -177,19 +284,19 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@1
-			    location   	(1472, 1203)
+			    location   	(249, 984)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
 			    justify    	0
-			    label      	"Generate the list based on parameters")
+			    label      	"Change the TV show data")
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
-			quidu      	"561B808C030F"
+			quidu      	"561B78F80234"
 			height     	118)
-		    (object UseCaseView "Use Case View::Generate the list based on watched TV shows" @2
-			location   	(652, 1109)
+		    (object UseCaseView "Use Case View::Delete TV show" @2
+			location   	(627, 1262)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -202,22 +309,19 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@2
-			    location   	(652, 1247)
+			    location   	(627, 1400)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
 			    justify    	0
-			    label      	"Generate the list based on watched TV shows")
+			    label      	"Delete TV show")
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
-			quidu      	"561B80680367"
+			quidu      	"561B78240104"
 			height     	118)
-		    (object ClassView "Class" "Use Case View::User" @3
-			ShowCompartmentStereotypes 	TRUE
-			IncludeAttribute 	TRUE
-			IncludeOperation 	TRUE
-			location   	(1052, 306)
+		    (object UseCaseView "Use Case View::Add TV show" @3
+			location   	(924, 896)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -230,10 +334,237 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@3
-			    location   	(1052, 466)
+			    location   	(924, 1034)
 			    anchor_loc 	1
 			    nlines     	2
-			    max_width  	325
+			    max_width  	630
+			    justify    	0
+			    label      	"Add TV show")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"561B781403D5"
+			height     	118)
+		    (object ClassView "Class" "Use Case View::Administrator" @4
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(520, 342)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@4
+			    location   	(520, 502)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	362
+			    justify    	0
+			    label      	"Administrator")
+			icon       	"Actor"
+			icon_style 	"Icon"
+			line_color 	3342489
+			quidu      	"561B73BF0230"
+			annotation 	8
+			autoResize 	TRUE)
+		    (object AssociationViewNew "$UNNAMED$0" @5
+			location   	(354, 647)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"561B7989021C"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$1" @6
+				Parent_View 	@5
+				location   	(-1749, 225)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"561B798903C0"
+				client     	@5
+				supplier   	@1
+				vertices   	(list Points
+				    (354, 647)
+				    (276, 788))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$2" @7
+				Parent_View 	@5
+				location   	(-1749, 225)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"561B798903CA"
+				client     	@5
+				supplier   	@4
+				vertices   	(list Points
+				    (354, 647)
+				    (433, 506))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$3" @8
+			location   	(578, 865)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"561B798C0168"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$4" @9
+				Parent_View 	@8
+				location   	(-1525, 443)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"561B798C03B6"
+				client     	@8
+				supplier   	@2
+				vertices   	(list Points
+				    (578, 865)
+				    (617, 1204))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$5" @10
+				Parent_View 	@8
+				location   	(-1525, 443)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"561B798C03B8"
+				client     	@8
+				supplier   	@4
+				vertices   	(list Points
+				    (578, 865)
+				    (540, 527))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$6" @11
+			location   	(743, 649)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"561B798F02BC"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$7" @12
+				Parent_View 	@11
+				location   	(-1360, 227)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"561B7990000A"
+				client     	@11
+				supplier   	@3
+				vertices   	(list Points
+				    (743, 649)
+				    (880, 837))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$8" @13
+				Parent_View 	@11
+				location   	(-1360, 227)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"561B7990000C"
+				client     	@11
+				supplier   	@4
+				vertices   	(list Points
+				    (743, 649)
+				    (606, 461))
+				line_style 	0)))
+		    (object UseCaseView "Use Case View::Generate the list based on parameters" @14
+			location   	(1904, 665)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@14
+			    location   	(1904, 803)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Generate the list based on parameters")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"561B808C030F"
+			height     	118)
+		    (object UseCaseView "Use Case View::Generate the list based on watched TV shows" @15
+			location   	(1471, 1150)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@15
+			    location   	(1471, 1288)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Generate the list based on watched TV shows")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"561B80680367"
+			height     	118)
+		    (object ClassView "Class" "Use Case View::User" @16
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1364, 372)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@16
+			    location   	(1364, 532)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	362
 			    justify    	0
 			    label      	"User")
 			icon       	"Actor"
@@ -242,8 +573,18 @@
 			quidu      	"561B73B303AB"
 			annotation 	8
 			autoResize 	TRUE)
-		    (object AssociationViewNew "$UNNAMED$0" @4
-			location   	(1268, 701)
+		    (object InheritView "" @17
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"561B7A12021F"
+			client     	@4
+			supplier   	@16
+			vertices   	(list Points
+			    (577, 342)
+			    (1304, 368))
+			line_style 	0)
+		    (object AssociationViewNew "$UNNAMED$9" @18
+			location   	(1610, 504)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -258,32 +599,32 @@
 			line_color 	3342489
 			quidu      	"561B80B801BA"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$1" @5
-				Parent_View 	@4
-				location   	(-306, 270)
+			    (object RoleView "$UNNAMED$10" @19
+				Parent_View 	@18
+				location   	(36, 73)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B80B90113"
-				client     	@4
-				supplier   	@1
+				client     	@18
+				supplier   	@14
 				vertices   	(list Points
-				    (1268, 701)
-				    (1436, 1005))
+				    (1610, 504)
+				    (1799, 607))
 				line_style 	0)
-			    (object RoleView "$UNNAMED$2" @6
-				Parent_View 	@4
-				location   	(-306, 270)
+			    (object RoleView "$UNNAMED$11" @20
+				Parent_View 	@18
+				location   	(36, 73)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B80B90115"
-				client     	@4
-				supplier   	@3
+				client     	@18
+				supplier   	@16
 				vertices   	(list Points
-				    (1268, 701)
-				    (1100, 397))
+				    (1610, 504)
+				    (1421, 402))
 				line_style 	0)))
-		    (object AssociationViewNew "$UNNAMED$6" @7
-			location   	(839, 724)
+		    (object AssociationViewNew "$UNNAMED$15" @21
+			location   	(1424, 824)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -298,29 +639,29 @@
 			line_color 	3342489
 			quidu      	"561B9C58002B"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$7" @8
-				Parent_View 	@7
-				location   	(-525, 352)
+			    (object RoleView "$UNNAMED$16" @22
+				Parent_View 	@21
+				location   	(60, 452)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B9C5803CE"
-				client     	@7
-				supplier   	@2
+				client     	@21
+				supplier   	@15
 				vertices   	(list Points
-				    (839, 724)
-				    (677, 1049))
+				    (1424, 824)
+				    (1461, 1091))
 				line_style 	0)
-			    (object RoleView "$UNNAMED$8" @9
-				Parent_View 	@7
-				location   	(-525, 352)
+			    (object RoleView "$UNNAMED$17" @23
+				Parent_View 	@21
+				location   	(60, 452)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"561B9C5803D8"
-				client     	@7
-				supplier   	@3
+				client     	@21
+				supplier   	@16
 				vertices   	(list Points
-				    (839, 724)
-				    (1002, 399))
+				    (1424, 824)
+				    (1388, 557))
 				line_style 	0)))))))
     root_category 	(object Class_Category "Logical View"
 	quid       	"561B733501EF"
@@ -331,11 +672,6 @@
 	logical_models 	(list unit_reference_list
 	    (object Class "TVShow"
 		quid       	"562E00580317"
-		superclasses 	(list inheritance_relationship_list
-		    (object Inheritance_Relationship
-			quid       	"566AEEE60106"
-			supplier   	"Logical View::DBConnection"
-			quidu      	"566AEE9C016F"))
 		class_attributes 	(list class_attribute_list
 		    (object ClassAttribute "name"
 			quid       	"56388DC5034E")
@@ -381,11 +717,7 @@
 		    (object Inheritance_Relationship
 			quid       	"5638BC08025D"
 			supplier   	"Logical View::TVShow"
-			quidu      	"562E00580317")
-		    (object Inheritance_Relationship
-			quid       	"566AEEDA037A"
-			supplier   	"Logical View::DBConnection"
-			quidu      	"566AEE9C016F"))
+			quidu      	"562E00580317"))
 		operations 	(list Operations
 		    (object Operation "chooseMode"
 			quid       	"56388EE80270"
@@ -419,12 +751,33 @@
 		    (object Inheritance_Relationship
 			quid       	"5638961F02D2"
 			supplier   	"Logical View::UserClass"
-			quidu      	"563895FF0260")
-		    (object Inheritance_Relationship
-			quid       	"566AEEE1014B"
-			supplier   	"Logical View::DBConnection"
-			quidu      	"566AEE9C016F"))
+			quidu      	"563895FF0260"))
 		operations 	(list Operations
+		    (object Operation "clickAddTVShow"
+			quid       	"56388F530321"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "clickDeleteTVShow"
+			quid       	"56388F6000CA"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "clickChangeTVShow"
+			quid       	"56388F660374"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "showPasswordWindow"
+			quid       	"56388F990365"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
+		    (object Operation "enterPassword"
+			quid       	"56388FA203B5"
+			concurrency 	"Sequential"
+			opExportControl 	"Public"
+			uid        	0)
 		    (object Operation "clickFindTVShows"
 			quid       	"563894870202"
 			concurrency 	"Sequential"
@@ -532,194 +885,183 @@
 		class_attributes 	(list class_attribute_list
 		    (object ClassAttribute "tvshow"
 			quid       	"5640843B00FE")))
-	    (object Class "DBConnection"
-		quid       	"566AEE9C016F"
-		operations 	(list Operations
-		    (object Operation "dbconnection"
-			quid       	"566AEEBE0268"
-			concurrency 	"Sequential"
-			opExportControl 	"Public"
-			uid        	0))
-		class_attributes 	(list class_attribute_list
-		    (object ClassAttribute "connection"
-			quid       	"566AEEB5015E")))
-	    (object Association "$UNNAMED$9"
+	    (object Association "$UNNAMED$18"
 		quid       	"5638BABA02B0"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$10"
+		    (object Role "$UNNAMED$19"
 			quid       	"5638BABB0058"
 			supplier   	"Logical View::SearchWindow"
 			quidu      	"56388ED702C9")
-		    (object Role "$UNNAMED$11"
+		    (object Role "$UNNAMED$20"
 			quid       	"5638BABB0062"
 			supplier   	"Logical View::ResultListWindow"
 			quidu      	"563892D60364")))
-	    (object Association "$UNNAMED$12"
+	    (object Association "$UNNAMED$21"
 		quid       	"5638BAD601B9"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$13"
+		    (object Role "$UNNAMED$22"
 			quid       	"5638BAD60353"
 			supplier   	"Logical View::SearchWindow"
 			quidu      	"56388ED702C9"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$14"
+		    (object Role "$UNNAMED$23"
 			quid       	"5638BAD6035D"
 			supplier   	"Logical View::TVShow"
 			quidu      	"562E00580317")))
-	    (object Association "$UNNAMED$15"
+	    (object Association "$UNNAMED$24"
 		quid       	"5638BADA0105"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$16"
+		    (object Role "$UNNAMED$25"
 			quid       	"5638BADA02E5"
 			supplier   	"Logical View::DeleteTVShowWindow"
 			quidu      	"563893B70163")
-		    (object Role "$UNNAMED$17"
+		    (object Role "$UNNAMED$26"
 			quid       	"5638BADA02E7"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE")))
-	    (object Association "$UNNAMED$18"
+	    (object Association "$UNNAMED$27"
 		quid       	"5638BAE102AA"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$19"
+		    (object Role "$UNNAMED$28"
 			quid       	"5638BAE200AC"
 			supplier   	"Logical View::AddTVShowWindow"
 			quidu      	"56388FB5033E")
-		    (object Role "$UNNAMED$20"
+		    (object Role "$UNNAMED$29"
 			quid       	"5638BAE200B6"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE"
 			is_navigable 	TRUE)))
-	    (object Association "$UNNAMED$21"
+	    (object Association "$UNNAMED$30"
 		quid       	"5638BAE4030E"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$22"
+		    (object Role "$UNNAMED$31"
 			quid       	"5638BAE5012E"
 			supplier   	"Logical View::ChangeTVShow"
 			quidu      	"563893E7024A")
-		    (object Role "$UNNAMED$23"
+		    (object Role "$UNNAMED$32"
 			quid       	"5638BAE50130"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE")))
-	    (object Association "$UNNAMED$24"
+	    (object Association "$UNNAMED$33"
 		quid       	"5638BB0301CC"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$25"
+		    (object Role "$UNNAMED$34"
 			quid       	"5638BB0303A2"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE")
-		    (object Role "$UNNAMED$26"
+		    (object Role "$UNNAMED$35"
 			quid       	"5638BB0303AC"
 			supplier   	"Logical View::SearchWindow"
 			quidu      	"56388ED702C9"
 			is_navigable 	TRUE)))
-	    (object Association "$UNNAMED$27"
+	    (object Association "$UNNAMED$36"
 		quid       	"5638BB100185"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$28"
+		    (object Role "$UNNAMED$37"
 			quid       	"5638BB100333"
 			supplier   	"Logical View::AddTVShowWindow"
 			quidu      	"56388FB5033E")
-		    (object Role "$UNNAMED$29"
+		    (object Role "$UNNAMED$38"
 			quid       	"5638BB100335"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE")))
-	    (object Association "$UNNAMED$30"
+	    (object Association "$UNNAMED$39"
 		quid       	"56406DED0347"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$31"
+		    (object Role "$UNNAMED$40"
 			quid       	"56406DEE0149"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$32"
+		    (object Role "$UNNAMED$41"
 			quid       	"56406DEE0167"
 			supplier   	"Logical View::TVShow"
 			quidu      	"562E00580317"
 			is_navigable 	TRUE)))
-	    (object Association "$UNNAMED$33"
+	    (object Association "$UNNAMED$42"
 		quid       	"56406E0E01AE"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$34"
+		    (object Role "$UNNAMED$43"
 			quid       	"56406E0E02EE"
 			supplier   	"Logical View::SearchWindow"
 			quidu      	"56388ED702C9")
-		    (object Role "$UNNAMED$35"
+		    (object Role "$UNNAMED$44"
 			quid       	"56406E0E02F8"
 			supplier   	"Logical View::TVShow"
 			quidu      	"562E00580317")))
-	    (object Association "$UNNAMED$36"
+	    (object Association "$UNNAMED$45"
 		quid       	"56406ED80281"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$37"
+		    (object Role "$UNNAMED$46"
 			quid       	"56406ED90097"
 			supplier   	"Logical View::TVShow"
 			quidu      	"562E00580317")
-		    (object Role "$UNNAMED$38"
+		    (object Role "$UNNAMED$47"
 			quid       	"56406ED900A1"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE")))
-	    (object Association "$UNNAMED$39"
+	    (object Association "$UNNAMED$48"
 		quid       	"56406F210325"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$40"
+		    (object Role "$UNNAMED$49"
 			quid       	"56406F2200E1"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE"
 			is_aggregate 	TRUE)
-		    (object Role "$UNNAMED$41"
+		    (object Role "$UNNAMED$50"
 			quid       	"56406F2200FF"
 			supplier   	"Logical View::TVShow"
 			quidu      	"562E00580317")))
-	    (object Association "$UNNAMED$42"
+	    (object Association "$UNNAMED$51"
 		quid       	"56406F5303BC"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$43"
+		    (object Role "$UNNAMED$52"
 			quid       	"56406F540208"
 			supplier   	"Logical View::OperationsWithDB"
 			quidu      	"56406E8200BA"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$44"
+		    (object Role "$UNNAMED$53"
 			quid       	"56406F54020A"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE")))
-	    (object Association "$UNNAMED$45"
+	    (object Association "$UNNAMED$54"
 		quid       	"56406FFC0397"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$46"
+		    (object Role "$UNNAMED$55"
 			quid       	"56406FFE0121"
 			supplier   	"Logical View::MainWindow"
 			quidu      	"56388F4102EE")
-		    (object Role "$UNNAMED$47"
+		    (object Role "$UNNAMED$56"
 			quid       	"56406FFE0153"
 			supplier   	"Logical View::TVShow"
 			quidu      	"562E00580317")))
-	    (object Association "$UNNAMED$48"
+	    (object Association "$UNNAMED$57"
 		quid       	"564078E8031D"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$49"
+		    (object Role "$UNNAMED$58"
 			quid       	"564078E90075"
 			supplier   	"Logical View::OperationsWithDB"
 			quidu      	"56406E8200BA"
 			is_navigable 	TRUE
 			is_aggregate 	TRUE)
-		    (object Role "$UNNAMED$50"
+		    (object Role "$UNNAMED$59"
 			quid       	"564078E90077"
 			supplier   	"Logical View::TVShow"
 			quidu      	"562E00580317"
 			is_navigable 	TRUE)))
-	    (object Association "$UNNAMED$51"
+	    (object Association "$UNNAMED$60"
 		quid       	"564085520270"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$52"
+		    (object Role "$UNNAMED$61"
 			quid       	"564085530054"
 			supplier   	"Logical View::ResultListWindow"
 			quidu      	"563892D60364"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$53"
+		    (object Role "$UNNAMED$62"
 			quid       	"56408553005E"
 			supplier   	"Logical View::SearchWindow"
 			quidu      	"56388ED702C9")))
-	    (object Mechanism @10
+	    (object Mechanism @24
 		logical_models 	(list unit_reference_list
 		    (object Object "User"
 			quid       	"5638A9210236"
@@ -854,10 +1196,10 @@
 	statemachine 	(object State_Machine "State/Activity Model"
 	    quid       	"5638AA9600A4"
 	    states     	(list States
-		(object State "$UNNAMED$54"
+		(object State "$UNNAMED$63"
 		    quid       	"5638AAA003CF"
 		    type       	"StartState")
-		(object State "$UNNAMED$55"
+		(object State "$UNNAMED$64"
 		    quid       	"5638AAA400CD"
 		    type       	"EndState")
 		(object State "Password window"
@@ -886,7 +1228,7 @@
 		    label      	""
 		    supplier   	"Logical View::State/Activity Model::Password window"
 		    supplier_quidu 	"5638AC0603CC"
-		    client     	"$UNNAMED$54"
+		    client     	"$UNNAMED$63"
 		    client_quidu 	"5638AAA003CF"
 		    Event      	(object Event "User clicks \"Add new TV show\""
 			quid       	"5638AC1003A3")
@@ -906,7 +1248,7 @@
 		(object State_Transition
 		    quid       	"5638AD4C022B"
 		    label      	""
-		    supplier   	"$UNNAMED$55"
+		    supplier   	"$UNNAMED$64"
 		    supplier_quidu 	"5638AAA400CD"
 		    client     	"Logical View::State/Activity Model::Password window"
 		    client_quidu 	"5638AC0603CC"
@@ -961,7 +1303,7 @@
 		(object State_Transition
 		    quid       	"5638AFF60385"
 		    label      	""
-		    supplier   	"$UNNAMED$55"
+		    supplier   	"$UNNAMED$64"
 		    supplier_quidu 	"5638AAA400CD"
 		    client     	"Logical View::State/Activity Model::TV show was added to the DB"
 		    client_quidu 	"5638AF1B038E"
@@ -972,7 +1314,7 @@
 		(object State_Transition
 		    quid       	"5638B0150138"
 		    label      	""
-		    supplier   	"$UNNAMED$55"
+		    supplier   	"$UNNAMED$64"
 		    supplier_quidu 	"5638AAA400CD"
 		    client     	"Logical View::State/Activity Model::TV show was not added to the DB"
 		    client_quidu 	"5638AF840236"
@@ -1024,19 +1366,19 @@
 		    origin_x   	0
 		    origin_y   	0
 		    items      	(list diagram_item_list
-			(object StateView "StartState" "$UNNAMED$54" @11
+			(object StateView "StartState" "$UNNAMED$63" @25
 			    location   	(29, 492)
 			    icon_style 	"Icon"
 			    line_color 	3342489
 			    quidu      	"5638AAA003CF"
 			    autoResize 	TRUE)
-			(object StateView "EndState" "$UNNAMED$55" @12
+			(object StateView "EndState" "$UNNAMED$64" @26
 			    location   	(781, 1540)
 			    icon_style 	"Icon"
 			    line_color 	3342489
 			    quidu      	"5638AAA400CD"
 			    autoResize 	TRUE)
-			(object StateView "Normal" "Password window" @13
+			(object StateView "Normal" "Password window" @27
 			    location   	(858, 489)
 			    font       	(object Font
 				size       	10
@@ -1049,7 +1391,7 @@
 				color      	0
 				default_color 	TRUE)
 			    label      	(object ItemLabel
-				Parent_View 	@13
+				Parent_View 	@27
 				location   	(858, 478)
 				fill_color 	13434879
 				anchor_loc 	1
@@ -1064,7 +1406,7 @@
 			    width      	584
 			    height     	134
 			    autoResize 	TRUE)
-			(object TransView "" @14
+			(object TransView "" @28
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1075,8 +1417,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @15
-				Parent_View 	@14
+			    label      	(object SegLabel @29
+				Parent_View 	@28
 				location   	(306, 592)
 				font       	(object Font
 				    size       	10
@@ -1101,14 +1443,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638AC1003A2"
-			    client     	@11
-			    supplier   	@13
+			    client     	@25
+			    supplier   	@27
 			    vertices   	(list Points
 				(59, 491)
 				(566, 490))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object StateView "Normal" "Add TV show window" @16
+			(object StateView "Normal" "Add TV show window" @30
 			    location   	(2066, 489)
 			    font       	(object Font
 				size       	10
@@ -1121,7 +1463,7 @@
 				color      	0
 				default_color 	TRUE)
 			    label      	(object ItemLabel
-				Parent_View 	@16
+				Parent_View 	@30
 				location   	(2066, 478)
 				fill_color 	13434879
 				anchor_loc 	1
@@ -1136,7 +1478,7 @@
 			    width      	360
 			    height     	134
 			    autoResize 	TRUE)
-			(object StateView "Normal" "Check the info" @17
+			(object StateView "Normal" "Check the info" @31
 			    location   	(2066, 1008)
 			    font       	(object Font
 				size       	10
@@ -1149,7 +1491,7 @@
 				color      	0
 				default_color 	TRUE)
 			    label      	(object ItemLabel
-				Parent_View 	@17
+				Parent_View 	@31
 				location   	(2066, 997)
 				fill_color 	13434879
 				anchor_loc 	1
@@ -1164,7 +1506,7 @@
 			    width      	352
 			    height     	134
 			    autoResize 	TRUE)
-			(object TransView "" @18
+			(object TransView "" @32
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1175,8 +1517,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @19
-				Parent_View 	@18
+			    label      	(object SegLabel @33
+				Parent_View 	@32
 				location   	(2395, 742)
 				font       	(object Font
 				    size       	10
@@ -1199,14 +1541,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638AEDE03D0"
-			    client     	@16
-			    supplier   	@17
+			    client     	@30
+			    supplier   	@31
 			    vertices   	(list Points
 				(2066, 556)
 				(2066, 941))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object StateView "Normal" "TV show was added to the DB" @20
+			(object StateView "Normal" "TV show was added to the DB" @34
 			    location   	(2066, 1539)
 			    font       	(object Font
 				size       	10
@@ -1219,7 +1561,7 @@
 				color      	0
 				default_color 	TRUE)
 			    label      	(object ItemLabel
-				Parent_View 	@20
+				Parent_View 	@34
 				location   	(2066, 1528)
 				fill_color 	13434879
 				anchor_loc 	1
@@ -1234,7 +1576,7 @@
 			    width      	400
 			    height     	134
 			    autoResize 	TRUE)
-			(object StateView "Normal" "TV show was not added to the DB" @21
+			(object StateView "Normal" "TV show was not added to the DB" @35
 			    location   	(780, 1008)
 			    font       	(object Font
 				size       	10
@@ -1247,7 +1589,7 @@
 				color      	0
 				default_color 	TRUE)
 			    label      	(object ItemLabel
-				Parent_View 	@21
+				Parent_View 	@35
 				location   	(780, 997)
 				fill_color 	13434879
 				anchor_loc 	1
@@ -1262,7 +1604,7 @@
 			    width      	422
 			    height     	134
 			    autoResize 	TRUE)
-			(object TransView "" @22
+			(object TransView "" @36
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1273,8 +1615,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @23
-				Parent_View 	@22
+			    label      	(object SegLabel @37
+				Parent_View 	@36
 				location   	(1466, 964)
 				font       	(object Font
 				    size       	10
@@ -1297,14 +1639,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638AFA601C7"
-			    client     	@17
-			    supplier   	@21
+			    client     	@31
+			    supplier   	@35
 			    vertices   	(list Points
 				(1890, 1008)
 				(991, 1008))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object TransView "" @24
+			(object TransView "" @38
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1315,8 +1657,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @25
-				Parent_View 	@24
+			    label      	(object SegLabel @39
+				Parent_View 	@38
 				location   	(1927, 1277)
 				font       	(object Font
 				    size       	10
@@ -1339,14 +1681,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638AFD200DC"
-			    client     	@17
-			    supplier   	@20
+			    client     	@31
+			    supplier   	@34
 			    vertices   	(list Points
 				(2066, 1075)
 				(2066, 1472))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object TransView "" @26
+			(object TransView "" @40
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1357,8 +1699,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @27
-				Parent_View 	@26
+			    label      	(object SegLabel @41
+				Parent_View 	@40
 				location   	(1209, 700)
 				font       	(object Font
 				    size       	10
@@ -1383,14 +1725,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638B02C037F"
-			    client     	@21
-			    supplier   	@16
+			    client     	@35
+			    supplier   	@30
 			    vertices   	(list Points
 				(946, 940)
 				(1886, 561))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object TransView "" @28
+			(object TransView "" @42
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1401,8 +1743,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @29
-				Parent_View 	@28
+			    label      	(object SegLabel @43
+				Parent_View 	@42
 				location   	(520, 1302)
 				font       	(object Font
 				    size       	10
@@ -1427,14 +1769,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638B0150138"
-			    client     	@21
-			    supplier   	@12
+			    client     	@35
+			    supplier   	@26
 			    vertices   	(list Points
 				(780, 1074)
 				(780, 1498))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object TransView "" @30
+			(object TransView "" @44
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1445,8 +1787,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @31
-				Parent_View 	@30
+			    label      	(object SegLabel @45
+				Parent_View 	@44
 				location   	(1518, 445)
 				font       	(object Font
 				    size       	10
@@ -1469,14 +1811,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638AE0C0398"
-			    client     	@13
-			    supplier   	@16
+			    client     	@27
+			    supplier   	@30
 			    vertices   	(list Points
 				(1150, 489)
 				(1886, 489))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object SelfTransView "" @32
+			(object SelfTransView "" @46
 			    location   	(858, 272)
 			    font       	(object Font
 				size       	10
@@ -1488,8 +1830,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @33
-				Parent_View 	@32
+			    label      	(object SegLabel @47
+				Parent_View 	@46
 				location   	(860, 212)
 				font       	(object Font
 				    size       	10
@@ -1512,13 +1854,13 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5640770E0009"
-			    client     	@13
-			    supplier   	@13
+			    client     	@27
+			    supplier   	@27
 			    vertices   	(list Points
 				(801, 421)
 				(915, 422))
 			    line_style 	4)
-			(object TransView "" @34
+			(object TransView "" @48
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1529,8 +1871,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @35
-				Parent_View 	@34
+			    label      	(object SegLabel @49
+				Parent_View 	@48
 				location   	(1344, 1584)
 				font       	(object Font
 				    size       	10
@@ -1555,14 +1897,14 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5638AFF60385"
-			    client     	@20
-			    supplier   	@12
+			    client     	@34
+			    supplier   	@26
 			    vertices   	(list Points
 				(1866, 1539)
 				(823, 1539))
 			    line_style 	0
 			    x_offset   	FALSE)
-			(object TransView "" @36
+			(object TransView "" @50
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1573,8 +1915,8 @@
 				strike     	FALSE
 				color      	0
 				default_color 	TRUE)
-			    label      	(object SegLabel @37
-				Parent_View 	@36
+			    label      	(object SegLabel @51
+				Parent_View 	@50
 				location   	(2572, 442)
 				font       	(object Font
 				    size       	10
@@ -1599,8 +1941,8 @@
 			    stereotype 	TRUE
 			    line_color 	3342489
 			    quidu      	"5640874E01F3"
-			    client     	@20
-			    supplier   	@16
+			    client     	@34
+			    supplier   	@30
 			    vertices   	(list Points
 				(2266, 1538)
 				(2746, 1538)
@@ -1627,11 +1969,11 @@
 		origin_x   	450
 		origin_y   	47
 		items      	(list diagram_item_list
-		    (object ClassView "Class" "Logical View::TVShow" @38
+		    (object ClassView "Class" "Logical View::MainWindow" @52
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
-			location   	(1778, 1344)
+			location   	(1817, 295)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -1643,8 +1985,58 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@38
-			    location   	(1603, 1184)
+			    Parent_View 	@52
+			    location   	(1470, 92)
+			    fill_color 	13434879
+			    nlines     	1
+			    max_width  	695
+			    justify    	0
+			    label      	"MainWindow")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56388F4102EE"
+			compartment 	(object Compartment
+			    Parent_View 	@52
+			    location   	(1470, 153)
+			    font       	(object Font
+				size       	10
+				face       	"Arial"
+				charSet    	204
+				bold       	FALSE
+				italics    	FALSE
+				underline  	FALSE
+				strike     	FALSE
+				color      	0
+				default_color 	TRUE)
+			    icon_style 	"Icon"
+			    fill_color 	13434879
+			    anchor     	2
+			    nlines     	7
+			    max_width  	500
+			    justify    	1)
+			width      	713
+			height     	431
+			annotation 	8
+			autoResize 	TRUE)
+		    (object ClassView "Class" "Logical View::TVShow" @53
+			ShowCompartmentStereotypes 	TRUE
+			IncludeAttribute 	TRUE
+			IncludeOperation 	TRUE
+			location   	(1815, 1347)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@53
+			    location   	(1640, 1187)
 			    fill_color 	13434879
 			    nlines     	1
 			    max_width  	351
@@ -1655,8 +2047,8 @@
 			fill_color 	13434879
 			quidu      	"562E00580317"
 			compartment 	(object Compartment
-			    Parent_View 	@38
-			    location   	(1603, 1245)
+			    Parent_View 	@53
+			    location   	(1640, 1248)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1677,11 +2069,11 @@
 			height     	344
 			annotation 	8
 			autoResize 	TRUE)
-		    (object ClassView "Class" "Logical View::MainWindow" @39
+		    (object ClassView "Class" "Logical View::OperationsWithDB" @54
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
-			location   	(1775, 151)
+			location   	(1818, 865)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -1693,20 +2085,20 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@39
-			    location   	(1569, 70)
+			    Parent_View 	@54
+			    location   	(1625, 709)
 			    fill_color 	13434879
 			    nlines     	1
-			    max_width  	412
+			    max_width  	386
 			    justify    	0
-			    label      	"MainWindow")
+			    label      	"OperationsWithDB")
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
-			quidu      	"56388F4102EE"
+			quidu      	"56406E8200BA"
 			compartment 	(object Compartment
-			    Parent_View 	@39
-			    location   	(1569, 131)
+			    Parent_View 	@54
+			    location   	(1625, 770)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1720,18 +2112,15 @@
 			    icon_style 	"Icon"
 			    fill_color 	13434879
 			    anchor     	2
-			    nlines     	2
-			    max_width  	418
+			    nlines     	5
+			    max_width  	356
 			    justify    	1)
-			width      	430
-			height     	186
+			width      	404
+			height     	336
 			annotation 	8
 			autoResize 	TRUE)
-		    (object ClassView "Class" "Logical View::ResultListWindow" @40
-			ShowCompartmentStereotypes 	TRUE
-			IncludeAttribute 	TRUE
-			IncludeOperation 	TRUE
-			location   	(591, 1330)
+		    (object AssociationViewNew "$UNNAMED$51" @55
+			location   	(1817, 603)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -1742,46 +2131,79 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@40
-			    location   	(407, 1224)
-			    fill_color 	13434879
-			    nlines     	1
-			    max_width  	368
-			    justify    	0
-			    label      	"ResultListWindow")
-			icon_style 	"Icon"
+			stereotype 	TRUE
 			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"563892D60364"
-			compartment 	(object Compartment
-			    Parent_View 	@40
-			    location   	(407, 1285)
-			    font       	(object Font
-				size       	10
-				face       	"Arial"
-				charSet    	204
-				bold       	FALSE
-				italics    	FALSE
-				underline  	FALSE
-				strike     	FALSE
-				color      	0
-				default_color 	TRUE)
-			    icon_style 	"Icon"
-			    fill_color 	13434879
-			    anchor     	2
-			    nlines     	3
-			    max_width  	359
-			    justify    	1)
-			width      	386
-			height     	236
-			annotation 	8
-			autoResize 	TRUE)
-		    (object ClassView "Class" "Logical View::SearchWindow" @41
+			quidu      	"56406F5303BC"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$52" @56
+				Parent_View 	@55
+				location   	(242, -238)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"56406F540208"
+				client     	@55
+				supplier   	@54
+				vertices   	(list Points
+				    (1817, 603)
+				    (1817, 696))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$53" @57
+				Parent_View 	@55
+				location   	(242, -238)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"56406F54020A"
+				client     	@55
+				supplier   	@52
+				vertices   	(list Points
+				    (1817, 603)
+				    (1817, 510))
+				line_style 	0)))
+		    (object AssociationViewNew "$UNNAMED$57" @58
+			location   	(1815, 1103)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"564078E8031D"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$58" @59
+				Parent_View 	@58
+				location   	(-9, -905)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"564078E90075"
+				client     	@58
+				supplier   	@54
+				vertices   	(list Points
+				    (1815, 1103)
+				    (1816, 1033))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$59" @60
+				Parent_View 	@58
+				location   	(-9, -905)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"564078E90077"
+				client     	@58
+				supplier   	@53
+				vertices   	(list Points
+				    (1815, 1103)
+				    (1815, 1174))
+				line_style 	0)))
+		    (object ClassView "Class" "Logical View::SearchWindow" @61
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
-			location   	(590, 556)
+			location   	(556, 290)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -1793,8 +2215,8 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@41
-			    location   	(362, 306)
+			    Parent_View 	@61
+			    location   	(328, 40)
 			    fill_color 	13434879
 			    nlines     	1
 			    max_width  	456
@@ -1805,8 +2227,8 @@
 			fill_color 	13434879
 			quidu      	"56388ED702C9"
 			compartment 	(object Compartment
-			    Parent_View 	@41
-			    location   	(362, 367)
+			    Parent_View 	@61
+			    location   	(328, 101)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1827,8 +2249,8 @@
 			height     	525
 			annotation 	8
 			autoResize 	TRUE)
-		    (object AssociationViewNew "$UNNAMED$51" @42
-			location   	(590, 1014)
+		    (object AssociationViewNew "$UNNAMED$33" @62
+			location   	(1126, 291)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -1841,37 +2263,37 @@
 			    default_color 	TRUE)
 			stereotype 	TRUE
 			line_color 	3342489
-			quidu      	"564085520270"
+			quidu      	"5638BB0301CC"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$52" @43
-				Parent_View 	@42
-				location   	(-47, 609)
+			    (object RoleView "$UNNAMED$34" @63
+				Parent_View 	@62
+				location   	(506, -553)
 				stereotype 	TRUE
 				line_color 	3342489
-				quidu      	"564085530054"
-				client     	@42
-				supplier   	@40
+				quidu      	"5638BB0303A2"
+				client     	@62
+				supplier   	@52
 				vertices   	(list Points
-				    (590, 1014)
-				    (590, 1211))
+				    (1126, 291)
+				    (1460, 292))
 				line_style 	0)
-			    (object RoleView "$UNNAMED$53" @44
-				Parent_View 	@42
-				location   	(-47, 609)
+			    (object RoleView "$UNNAMED$35" @64
+				Parent_View 	@62
+				location   	(506, -553)
 				stereotype 	TRUE
 				line_color 	3342489
-				quidu      	"56408553005E"
-				client     	@42
-				supplier   	@41
+				quidu      	"5638BB0303AC"
+				client     	@62
+				supplier   	@61
 				vertices   	(list Points
-				    (590, 1014)
-				    (590, 818))
+				    (1126, 291)
+				    (793, 290))
 				line_style 	0)))
-		    (object ClassView "Class" "Logical View::DBConnection" @45
+		    (object ClassView "Class" "Logical View::ResultListWindow" @65
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
-			location   	(1776, 556)
+			location   	(557, 936)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -1883,20 +2305,20 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@45
-			    location   	(1616, 450)
+			    Parent_View 	@65
+			    location   	(373, 830)
 			    fill_color 	13434879
 			    nlines     	1
-			    max_width  	320
+			    max_width  	368
 			    justify    	0
-			    label      	"DBConnection")
+			    label      	"ResultListWindow")
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
-			quidu      	"566AEE9C016F"
+			quidu      	"563892D60364"
 			compartment 	(object Compartment
-			    Parent_View 	@45
-			    location   	(1616, 511)
+			    Parent_View 	@65
+			    location   	(373, 891)
 			    font       	(object Font
 				size       	10
 				face       	"Arial"
@@ -1911,44 +2333,54 @@
 			    fill_color 	13434879
 			    anchor     	2
 			    nlines     	3
-			    max_width  	319
+			    max_width  	359
 			    justify    	1)
-			width      	338
+			width      	386
 			height     	236
 			annotation 	8
 			autoResize 	TRUE)
-		    (object InheritView "" @46
+		    (object AssociationViewNew "$UNNAMED$60" @66
+			location   	(556, 684)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
 			stereotype 	TRUE
 			line_color 	3342489
-			quidu      	"566AEEDA037A"
-			client     	@41
-			supplier   	@45
-			vertices   	(list Points
-			    (827, 556)
-			    (1606, 556))
-			line_style 	0)
-		    (object InheritView "" @47
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"566AEEE60106"
-			client     	@38
-			supplier   	@45
-			vertices   	(list Points
-			    (1777, 1171)
-			    (1776, 674))
-			line_style 	0)
-		    (object InheritView "" @48
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"566AEEE1014B"
-			client     	@39
-			supplier   	@45
-			vertices   	(list Points
-			    (1775, 244)
-			    (1775, 437))
-			line_style 	0)))
+			quidu      	"564085520270"
+			roleview_list 	(list RoleViews
+			    (object RoleView "$UNNAMED$61" @67
+				Parent_View 	@66
+				location   	(-81, 279)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"564085530054"
+				client     	@66
+				supplier   	@65
+				vertices   	(list Points
+				    (556, 684)
+				    (556, 817))
+				line_style 	0)
+			    (object RoleView "$UNNAMED$62" @68
+				Parent_View 	@66
+				location   	(-81, 279)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"56408553005E"
+				client     	@66
+				supplier   	@61
+				vertices   	(list Points
+				    (556, 684)
+				    (556, 552))
+				line_style 	0)))))
 	    (object InteractionDiagram "SequenceDiagram"
-		mechanism_ref 	@10
+		mechanism_ref 	@24
 		quid       	"5638A91403D7"
 		title      	"SequenceDiagram"
 		zoom       	100
@@ -1957,7 +2389,7 @@
 		origin_x   	0
 		origin_y   	0
 		items      	(list diagram_item_list
-		    (object InterObjView "User" @49
+		    (object InterObjView "User" @69
 			location   	(231, 225)
 			font       	(object Font
 			    size       	10
@@ -1970,7 +2402,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@49
+			    Parent_View 	@69
 			    location   	(231, 225)
 			    fill_color 	13434879
 			    anchor_loc 	1
@@ -1988,42 +2420,42 @@
 			icon_width 	0
 			icon_y_offset 	0
 			annotation 	1
-			Focus_Of_Control 	(object Focus_Of_Control "" @50
+			Focus_Of_Control 	(object Focus_Of_Control "" @70
 			    location   	(231, 409)
 			    line_color 	3342489
-			    InterObjView 	@49
+			    InterObjView 	@69
 			    height     	242
 			    y_coord    	152
 			    Nested     	FALSE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @51
+			Focus_Of_Control 	(object Focus_Of_Control "" @71
 			    location   	(231, 551)
 			    line_color 	3342489
-			    InterObjView 	@49
+			    InterObjView 	@69
 			    height     	1
 			    y_coord    	-89
 			    Nested     	TRUE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @52
+			Focus_Of_Control 	(object Focus_Of_Control "" @72
 			    location   	(231, 747)
 			    line_color 	3342489
-			    InterObjView 	@49
+			    InterObjView 	@69
 			    height     	90
 			    y_coord    	0
 			    Nested     	FALSE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @53
+			Focus_Of_Control 	(object Focus_Of_Control "" @73
 			    location   	(231, 969)
 			    line_color 	3342489
-			    InterObjView 	@49
+			    InterObjView 	@69
 			    height     	90
 			    y_coord    	0
 			    Nested     	FALSE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @54
+			Focus_Of_Control 	(object Focus_Of_Control "" @74
 			    location   	(231, 1494)
 			    line_color 	3342489
-			    InterObjView 	@49
+			    InterObjView 	@69
 			    height     	90
 			    y_coord    	0
 			    Nested     	FALSE))
-		    (object InterObjView "Interface" @55
+		    (object InterObjView "Interface" @75
 			location   	(860, 225)
 			font       	(object Font
 			    size       	10
@@ -2036,7 +2468,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@55
+			    Parent_View 	@75
 			    location   	(860, 225)
 			    fill_color 	13434879
 			    anchor_loc 	1
@@ -2054,35 +2486,35 @@
 			icon_width 	0
 			icon_y_offset 	0
 			annotation 	1
-			Focus_Of_Control 	(object Focus_Of_Control "" @56
+			Focus_Of_Control 	(object Focus_Of_Control "" @76
 			    location   	(860, 409)
 			    line_color 	3342489
-			    InterObjView 	@55
+			    InterObjView 	@75
 			    height     	142
 			    y_coord    	52
 			    Nested     	FALSE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @57
+			Focus_Of_Control 	(object Focus_Of_Control "" @77
 			    location   	(860, 747)
 			    line_color 	3342489
-			    InterObjView 	@55
+			    InterObjView 	@75
 			    height     	90
 			    y_coord    	0
 			    Nested     	FALSE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @58
+			Focus_Of_Control 	(object Focus_Of_Control "" @78
 			    location   	(860, 969)
 			    line_color 	3342489
-			    InterObjView 	@55
+			    InterObjView 	@75
 			    height     	195
 			    y_coord    	105
 			    Nested     	FALSE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @59
+			Focus_Of_Control 	(object Focus_Of_Control "" @79
 			    location   	(860, 1389)
 			    line_color 	3342489
-			    InterObjView 	@55
+			    InterObjView 	@75
 			    height     	105
 			    y_coord    	15
 			    Nested     	FALSE))
-		    (object InterObjView "OperationsWithDB" @60
+		    (object InterObjView "OperationsWithDB" @80
 			location   	(1447, 225)
 			font       	(object Font
 			    size       	10
@@ -2095,7 +2527,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@60
+			    Parent_View 	@80
 			    location   	(1447, 225)
 			    fill_color 	13434879
 			    anchor_loc 	1
@@ -2113,21 +2545,21 @@
 			icon_width 	0
 			icon_y_offset 	0
 			annotation 	1
-			Focus_Of_Control 	(object Focus_Of_Control "" @61
+			Focus_Of_Control 	(object Focus_Of_Control "" @81
 			    location   	(1447, 1074)
 			    line_color 	3342489
-			    InterObjView 	@60
+			    InterObjView 	@80
 			    height     	520
 			    y_coord    	430
 			    Nested     	FALSE)
-			Focus_Of_Control 	(object Focus_Of_Control "" @62
+			Focus_Of_Control 	(object Focus_Of_Control "" @82
 			    location   	(1447, 1284)
 			    line_color 	3342489
-			    InterObjView 	@60
+			    InterObjView 	@80
 			    height     	1
 			    y_coord    	-89
 			    Nested     	TRUE))
-		    (object InterObjView "DB" @63
+		    (object InterObjView "DB" @83
 			location   	(2063, 225)
 			font       	(object Font
 			    size       	10
@@ -2140,7 +2572,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@63
+			    Parent_View 	@83
 			    location   	(2063, 225)
 			    fill_color 	13434879
 			    anchor_loc 	1
@@ -2158,14 +2590,14 @@
 			icon_width 	0
 			icon_y_offset 	0
 			annotation 	1
-			Focus_Of_Control 	(object Focus_Of_Control "" @64
+			Focus_Of_Control 	(object Focus_Of_Control "" @84
 			    location   	(2063, 1179)
 			    line_color 	3342489
-			    InterObjView 	@63
+			    InterObjView 	@83
 			    height     	105
 			    y_coord    	15
 			    Nested     	FALSE))
-		    (object InterMessView "Select the mode" @65
+		    (object InterMessView "Select the mode" @85
 			location   	(0, 409)
 			font       	(object Font
 			    size       	10
@@ -2177,8 +2609,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @66
-			    Parent_View 	@65
+			label      	(object SegLabel @86
+			    Parent_View 	@85
 			    location   	(545, 365)
 			    font       	(object Font
 				size       	10
@@ -2200,14 +2632,14 @@
 			    height     	45
 			    orientation 	0)
 			line_color 	3342489
-			client     	@49
-			supplier   	@55
-			Focus_Src  	@50
-			Focus_Entry 	@56
+			client     	@69
+			supplier   	@75
+			Focus_Src  	@70
+			Focus_Entry 	@76
 			origin     	(246, 409)
 			terminus   	(844, 409)
 			ordinal    	0)
-		    (object InterMessView "Show the parameters fields" @67
+		    (object InterMessView "Show the parameters fields" @87
 			location   	(0, 551)
 			font       	(object Font
 			    size       	10
@@ -2219,8 +2651,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @68
-			    Parent_View 	@67
+			label      	(object SegLabel @88
+			    Parent_View 	@87
 			    location   	(546, 507)
 			    font       	(object Font
 				size       	10
@@ -2242,14 +2674,14 @@
 			    height     	45
 			    orientation 	1)
 			line_color 	3342489
-			client     	@55
-			supplier   	@49
-			Focus_Src  	@56
-			Focus_Entry 	@51
+			client     	@75
+			supplier   	@69
+			Focus_Src  	@76
+			Focus_Entry 	@71
 			origin     	(844, 551)
 			terminus   	(247, 551)
 			ordinal    	1)
-		    (object InterMessView "Specify parameters" @69
+		    (object InterMessView "Specify parameters" @89
 			location   	(0, 747)
 			font       	(object Font
 			    size       	10
@@ -2261,8 +2693,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @70
-			    Parent_View 	@69
+			label      	(object SegLabel @90
+			    Parent_View 	@89
 			    location   	(545, 703)
 			    font       	(object Font
 				size       	10
@@ -2284,14 +2716,14 @@
 			    height     	45
 			    orientation 	0)
 			line_color 	3342489
-			client     	@49
-			supplier   	@55
-			Focus_Src  	@52
-			Focus_Entry 	@57
+			client     	@69
+			supplier   	@75
+			Focus_Src  	@72
+			Focus_Entry 	@77
 			origin     	(246, 747)
 			terminus   	(844, 747)
 			ordinal    	2)
-		    (object InterMessView "Click \"Find\"" @71
+		    (object InterMessView "Click \"Find\"" @91
 			location   	(0, 969)
 			font       	(object Font
 			    size       	10
@@ -2303,8 +2735,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @72
-			    Parent_View 	@71
+			label      	(object SegLabel @92
+			    Parent_View 	@91
 			    location   	(545, 926)
 			    font       	(object Font
 				size       	10
@@ -2328,14 +2760,14 @@
 			    height     	44
 			    orientation 	0)
 			line_color 	3342489
-			client     	@49
-			supplier   	@55
-			Focus_Src  	@53
-			Focus_Entry 	@58
+			client     	@69
+			supplier   	@75
+			Focus_Src  	@73
+			Focus_Entry 	@78
 			origin     	(246, 969)
 			terminus   	(844, 969)
 			ordinal    	3)
-		    (object InterMessView "Send parameters" @73
+		    (object InterMessView "Send parameters" @93
 			location   	(0, 1074)
 			font       	(object Font
 			    size       	10
@@ -2347,8 +2779,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @74
-			    Parent_View 	@73
+			label      	(object SegLabel @94
+			    Parent_View 	@93
 			    location   	(1153, 1030)
 			    font       	(object Font
 				size       	10
@@ -2370,14 +2802,14 @@
 			    height     	45
 			    orientation 	0)
 			line_color 	3342489
-			client     	@55
-			supplier   	@60
-			Focus_Src  	@58
-			Focus_Entry 	@61
+			client     	@75
+			supplier   	@80
+			Focus_Src  	@78
+			Focus_Entry 	@81
 			origin     	(875, 1074)
 			terminus   	(1431, 1074)
 			ordinal    	4)
-		    (object InterMessView "Find TVShows" @75
+		    (object InterMessView "Find TVShows" @95
 			location   	(0, 1179)
 			font       	(object Font
 			    size       	10
@@ -2389,8 +2821,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @76
-			    Parent_View 	@75
+			label      	(object SegLabel @96
+			    Parent_View 	@95
 			    location   	(1754, 1135)
 			    font       	(object Font
 				size       	10
@@ -2412,14 +2844,14 @@
 			    height     	45
 			    orientation 	0)
 			line_color 	3342489
-			client     	@60
-			supplier   	@63
-			Focus_Src  	@61
-			Focus_Entry 	@64
+			client     	@80
+			supplier   	@83
+			Focus_Src  	@81
+			Focus_Entry 	@84
 			origin     	(1462, 1179)
 			terminus   	(2047, 1179)
 			ordinal    	5)
-		    (object InterMessView "Get TVShows" @77
+		    (object InterMessView "Get TVShows" @97
 			location   	(0, 1284)
 			font       	(object Font
 			    size       	10
@@ -2431,8 +2863,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @78
-			    Parent_View 	@77
+			label      	(object SegLabel @98
+			    Parent_View 	@97
 			    location   	(1755, 1242)
 			    font       	(object Font
 				size       	10
@@ -2454,14 +2886,14 @@
 			    height     	43
 			    orientation 	1)
 			line_color 	3342489
-			client     	@63
-			supplier   	@60
-			Focus_Src  	@64
-			Focus_Entry 	@62
+			client     	@83
+			supplier   	@80
+			Focus_Src  	@84
+			Focus_Entry 	@82
 			origin     	(2047, 1284)
 			terminus   	(1463, 1284)
 			ordinal    	6)
-		    (object InterMessView "Generate the  list" @79
+		    (object InterMessView "Generate the  list" @99
 			location   	(0, 1389)
 			font       	(object Font
 			    size       	10
@@ -2473,8 +2905,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @80
-			    Parent_View 	@79
+			label      	(object SegLabel @100
+			    Parent_View 	@99
 			    location   	(1153, 1340)
 			    font       	(object Font
 				size       	10
@@ -2496,14 +2928,14 @@
 			    height     	50
 			    orientation 	1)
 			line_color 	3342489
-			client     	@60
-			supplier   	@55
-			Focus_Src  	@61
-			Focus_Entry 	@59
+			client     	@80
+			supplier   	@75
+			Focus_Src  	@81
+			Focus_Entry 	@79
 			origin     	(1431, 1389)
 			terminus   	(876, 1389)
 			ordinal    	7)
-		    (object InterMessView "Show the TV shows list" @81
+		    (object InterMessView "Show the TV shows list" @101
 			location   	(0, 1494)
 			font       	(object Font
 			    size       	10
@@ -2515,8 +2947,8 @@
 			    strike     	FALSE
 			    color      	0
 			    default_color 	TRUE)
-			label      	(object SegLabel @82
-			    Parent_View 	@81
+			label      	(object SegLabel @102
+			    Parent_View 	@101
 			    location   	(546, 1450)
 			    font       	(object Font
 				size       	10
@@ -2538,10 +2970,10 @@
 			    height     	45
 			    orientation 	1)
 			line_color 	3342489
-			client     	@55
-			supplier   	@49
-			Focus_Src  	@59
-			Focus_Entry 	@54
+			client     	@75
+			supplier   	@69
+			Focus_Src  	@79
+			Focus_Entry 	@74
 			origin     	(844, 1494)
 			terminus   	(247, 1494)
 			ordinal    	8)))))

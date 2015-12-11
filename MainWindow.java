@@ -233,7 +233,7 @@ public class MainWindow extends DatabaseConnection{
 		btnByShows.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				for(Combo combo : comboShow)
+			/*	for(Combo combo : comboShow)
 					combo.setEnabled(true);
 				for(Button btn : btnGenres)
 					btn.setEnabled(false);
@@ -242,7 +242,7 @@ public class MainWindow extends DatabaseConnection{
 				comboratingfrom.setEnabled(false);
 				comboratingto.setEnabled(false);
 				comboyearfrom.setEnabled(false);
-				comboyearto.setEnabled(false);
+				comboyearto.setEnabled(false);*/
 			}
 		});
 		btnByShows.setSelection(true);

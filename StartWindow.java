@@ -9,7 +9,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-import view.PasswordWindow;
 import view.MainWindow;
 
 public class StartWindow {
@@ -64,8 +63,7 @@ public class StartWindow {
 		btnAdmin.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				PasswordWindow window = new PasswordWindow(shell, SWT.CLOSE);
-				window.open();
+				
 			}
 		});
 		btnAdmin.setBounds(100, 167, 75, 25);
